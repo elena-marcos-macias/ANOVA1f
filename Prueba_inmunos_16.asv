@@ -18,12 +18,12 @@
 % github; git; json
 
 %--------- Add function path and set save path ----------
-addpath ('./utils');
-savePath = './results/';
+addpath ('/utils');
+savePath = '/results/';
 
 %--------- Load data ---------
 fileName = 'Analisis_inmuno_GFAP.xlsx';
-T_Original = readtable(['./data/' fileName]);
+T_Original = readtable(['data/' fileName]);
 
 % -------- Remove rows with NaN --------
 T_Original = rmmissing(T_Original);  % Remove rows that contain at least one NaN
@@ -72,8 +72,8 @@ controlGroup1 = 'CTRL+VEH';
 controlGroup2 = 'PILO+VEH';
 [T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(Data, Group, Regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
 % Save results as .xlsx
-writetable(T_posthoc_vsControl1,[savePath 'Posthoc_vsControl1.xlsx']);
-writetable(T_posthoc_vsControl2,[savePath 'Posthoc_vsControl2.xlsx']);
+writetable(T_posthoc_vsControl1,'Posthoc_vsControl1.xlsx');
+writetable(T_posthoc_vsControl2,'Posthoc_vsControl2.xlsx');
 
 
 %% --------------------- PLOT ----------------------------------
