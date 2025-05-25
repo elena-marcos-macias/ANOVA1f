@@ -1,0 +1,197 @@
+% USE Statistical analysis for 1 factor inter-group (the code compares the
+% different groups amongst eachother per variable, but does not compare
+% across variables)
+%
+% INPUTS
+%   - ArchiveName.xlsx      Excel archive in the same file where the program runs...
+%                           each row must correspond to a subject,...
+%                           there must be a categorical variable, e.g. "experimental group".
+%
+% OUTPUTS
+%   - DescriptiveStatistics.xlsx        Excel archive containing Mean and Standard deviation per group and variable
+%   - VarianceAnalysis.xlsx             Excel archive containing Statistics and p-value after the group comparisons per variable (ANOVA or Kruskal-Wallis)
+%   - Posthoc_AllComparisons.xlsx       Excel archive containing p-value after the post hoc analysis for all possible comparisons (Tukey or Dunn-Bonferroni)
+%   - Posthoc_vsControl1.xlsx           Excel archive containing p-value after the post hoc analysis for the comparisons against a control group (Dunnett or Dunn-Bonferroni)
+%   - Posthoc_vsControl2.xlsx           (Optional) Excel archive equal to 'Posthoc_vsControl1' for a different control group (Dunnett or Dunn-Bonferroni)
+%   - BarPlot                           Bar plot that represents the mean and SD for each group, grouped per variable. It also marks with an '*' those comparisons that have a p-value < 0.05.
+
+% github; git; json
+
+
+%--------- Load data ---------
+T_Original = readtable("Analisis_inmuno_GFAP.xlsx");
+
+% -------- Remove rows with NaN --------
+T_Original = rmmissing(T_Original);  % Remove rows that contain at least one NaN
+
+% -------- Select data to use (columns with 'Mean') ---------------
+Target_columns = int32([4,8,8,14]);
+Ignore_columns = int32([5,7,9,11,13]);
+T_Data = selectColumns (T_Original, Target_columns, Ignore_columns);
+Regions_unique = T_Data.Properties.VariableNames;
+nRegions = numel(Regions_unique);
+
+% ------- Define categorical variable ('Group') and its categories ----------
+Group = categorical(T_Original.Group);
+Group_categories = categories(Group);
+nGroup = numel(Group_categories);
+
+% -------- Prepare numeric data (array format) for analysis ---------
+Data = table2array(T_Data);
+
+
+%% DESCRIPTIVE ANALYSIS
+
+% --------- Mean and standard deviation -----------------
+[T_descriptives, Mean_RegionGroup, SD_RegionGroup] = compute_descriptives(Data, Group, Group_categories, Regions_unique, nRegions, nGroup);
+% Save results as .xlsx
+writetable(T_descriptives, 'DescriptiveStatistics.xlsx');
+
+
+%% VARIANCE ANALYSIS - ANOVA 1F
+
+% ------------ Check normality and homogeneity ---------------
+ANOVA_friendly = checkANOVA1f(Data, Group, Group_categories);
+
+%------------- Analysis of variance (ANOVA or KRUSKAL-WALLIS)---------------
+[T_VarianceAnalysis, p_variance] = Variance1f_analysis(Data, Group, ANOVA_friendly, Regions_unique);
+% Save results as .xlsx
+writetable(T_VarianceAnalysis, 'VarianceAnalysis.xlsx');
+
+% ------------- Post-hoc - All comparisons (Tukey or Dunn-Bonferroni) -------
+T_posthoc_AllComparisons = posthoc1f_allcomparisons(Data, Group, Group_categories, ANOVA_friendly, Regions_unique);
+% Save results as .xlsx
+writetable(T_posthoc_AllComparisons,'Posthoc_AllComparisons.xlsx');
+
+% ------------- Post-hoc - Comparisons against control (Dunnett or Dunn-Bonferroni vs. control) -------
+controlGroup1 = 'CTRL+VEH';
+controlGroup2 = 'PILO+VEH';
+[T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(Data, Group, Regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
+% Save results as .xlsx
+writetable(T_posthoc_vsControl1,'Posthoc_vsControl1.xlsx');
+writetable(T_posthoc_vsControl2,'Posthoc_vsControl2.xlsx');
+
+
+%% --------------------- PLOT ----------------------------------
+Group = reordercats(Group, {'CTRL+VEH', 'PILO+VEH', 'CTRL+SP', 'PILO+SP'}); % Order in which groups should appear
+Group_categories = categories(Group); % After reordering, refresh the group variable
+
+% Colors. Use the command `uisetcolor` to explore color values
+myColors = [...
+    1 1 1;              % white
+    0.71 0.71 0.71;     % gray
+    0.9686 0.9294 0.3686; % yellow
+    0.8745 0.4235 0.9020]; % purple
+myColorsDark = [...
+    0.5 0.5 0.5;        % dark gray 1
+    0.4000 0.3647 0.3647; % dark gray 2
+    0.7882 0.6902 0.0549; % dark yellow
+    0.4196 0.0392 0.4392]; % dark purple
+
+% Bar plot
+GraphBar = bar(Mean_RegionGroup');
+for g = 1:nGroup
+    GraphBar(g).FaceColor = myColors(g,:);
+    GraphBar(g).EdgeColor = myColorsDark(g,:);
+    GraphBar(g).BarWidth = 0.85;
+    GraphBar(g).LineWidth = 1.5;
+end
+
+% Error bars
+hold on
+for g = 1:nGroup
+    x = GraphBar(g).XEndPoints;
+    y = GraphBar(g).YData;
+    e = SD_RegionGroup(g,:);
+    errorbar(x, y, e, 'k.', 'LineWidth', 1);
+end
+
+% Overlay individual data points
+nSubjects = size(Data, 1);
+colors = lines(nGroup);  % Color map by group
+markerShapes = {'^', 'o', '^', 'o'};  % Marker shapes by group
+filledStatus = [false, false, true, true]; % filled or not
+for g = 1:nGroup
+    % Extract individual data for group g
+    Data_gesima = Data(Group == Group_categories{g}, :);
+    % For each region (column)
+    for r = 1:nRegions
+        % X: the X position of the corresponding bar
+        xPos = GraphBar(g).XEndPoints(r);
+        % Y: the individual values
+        yVals = Data_gesima(:, r);
+        % Draw points
+        marker = markerShapes{g};
+        if filledStatus(g)
+            scatter(repmat(xPos, size(yVals)), yVals, 30,...
+                'Marker', marker,...
+                'MarkerEdgeColor', myColorsDark(g,:), ...
+                'MarkerFaceColor', myColorsDark(g,:),...
+                'LineWidth', 1 , ...
+                'jitter', 'on', 'jitterAmount', 0.10);
+        else
+            scatter(repmat(xPos, size(yVals)), yVals, 30,...
+                'Marker', marker,...
+                'MarkerEdgeColor', myColorsDark(g,:), ...
+                'MarkerFaceColor', 'none',...
+                'LineWidth', 1 , ...
+                'jitter', 'on', 'jitterAmount', 0.10);
+        end
+    end
+end
+
+% Add asterisks where p < 0.05
+for r = 1:nRegions
+    if p_variance(r) < 0.01
+        % Get max bar height in region r
+        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+        % Centered X position for the asterisk
+        xPos = mean(arrayfun(@(g) GraphBar(g).XEndPoints(r), 1:nGroup));
+        % Add asterisk
+        text(xPos, maxY + 0.13 * maxY, '**', 'FontSize', 30, 'HorizontalAlignment', 'center', 'Color', 'k');
+    elseif p_variance(r) < 0.05
+        % Get max bar height in region r
+        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+        % Centered X position for the asterisk
+        xPos = mean(arrayfun(@(g) GraphBar(g).XEndPoints(r), 1:nGroup));
+        % Add asterisk
+        text(xPos, maxY + 0.13 * maxY, '*', 'FontSize', 30, 'HorizontalAlignment', 'center', 'Color', 'k');
+    end
+end
+
+% Add horizontal lines below asterisks where p < 0.05
+for r = 1:nRegions
+    if p_variance(r) < 0.05
+        % X positions for the line ends (first and last group bar)
+        xLeft = GraphBar(1).XEndPoints(r);
+        xRight = GraphBar(end).XEndPoints(r);
+        % Height (just below the asterisk)
+        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+        yBar = maxY + 0.11 * maxY;
+        % Draw horizontal line
+        plot([xLeft, xRight], [yBar, yBar], 'k-', 'LineWidth', 1.5);
+    end
+end
+
+% Add horizontal lines xxxxx
+%for r = 1:nRegions
+%    if p_variance(r) < 0.05
+        % X positions for the line ends (first and last group bar)
+%        xLeft = GraphBar(1).XEndPoints(r);
+%        xRight = GraphBar(end).XEndPoints(r);
+        % Height (just below the asterisk)
+%        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+%        yBar = maxY + 0.11 * maxY;
+        % Draw horizontal line
+%        plot([xLeft, xRight], [yBar, yBar], 'k-', 'LineWidth', 1.5);
+%    end
+%end
+
+% Labels and title
+title('GFAP Immunofluorescence');
+legend(Group_categories);
+xticklabels(T_Data.Properties.VariableNames);
+xticks(1:nRegions);
+xlabel('Microscopy images');
+ylabel('Fluorescence intensity (units)');
+hold off
