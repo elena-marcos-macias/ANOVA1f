@@ -21,8 +21,11 @@
 addpath ('./utils');
 savePath = './results/';
 
+% --------- Read instructions JSON archive -----------
+S = readstruct("data/instructionsANOVA1f.json");
+
 %--------- Load data ---------
-fileName = 'FUS_20250526.xlsx';
+fileName = S.inputDataSelection.fileName;
 T_Original = readtable(['./data/' fileName]);
 
 % -------- Remove rows with NaN --------
@@ -36,8 +39,8 @@ regions_unique = T_Data.Properties.VariableNames;
 nRegions = numel(regions_unique);
 
 % ------- Define categorical variable ('Group') and its categories ----------
-group_name = 'Genotipo';
-[group, group_categories, nGroup] = getCategoricalGroup(T_Original, group_name);
+groupName = 'Genotipo';
+[group, group_categories, nGroup] = getCategoricalGroup(T_Original, groupName);
 
 
 % -------- Prepare numeric data (array format) for analysis ---------

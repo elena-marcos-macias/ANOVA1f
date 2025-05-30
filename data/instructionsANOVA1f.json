@@ -1,0 +1,55 @@
+{
+    "Ensemble": {
+        "Music": "jazz",
+        "BandName": "Kool Katz",
+        "Instrumentation": [
+            {
+                "Type": "wind",
+                "Instrument": "trumpet",
+            },
+            {
+                "Type": "percussion",
+                "Instrument": "piano",
+                "Pianotype": "concert grand",
+            },
+            {
+                "Type": "percussion",
+                "Instrument": "drums",
+                "Drumkit": [
+                    "bass drum",
+                    "floor tom",
+                    "snare drum",
+                    "hi-hat",
+                    "ride cymbal"
+                ],
+            },
+            {
+                "Type": "string",
+                "Instrument": "bass",
+                "Basstype": "upright"
+            }
+        ]
+    },
+    "Musicians": [
+        {
+            "Role": "trumpeter",
+            "Name": "Miles"
+        },
+        {
+            "Role": "vocalist",
+            "Name": "Roger"
+        },
+        {
+            "Role": "pianist",
+            "Name": "Diana"
+        },
+        {
+            "Role": "drummer",
+            "Name": "George"
+        },
+        {
+            "Role": "bassist",
+            "Name": "John"
+        }
+    ]
+}
