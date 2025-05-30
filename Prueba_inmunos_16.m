@@ -22,23 +22,23 @@ addpath ('./utils');
 savePath = './results/';
 
 %--------- Load data ---------
-fileName = 'Analisis_inmuno_GFAP.xlsx';
+fileName = 'FUS_20250526.xlsx';
 T_Original = readtable(['./data/' fileName]);
 
 % -------- Remove rows with NaN --------
 T_Original = rmmissing(T_Original);  % Remove rows that contain at least one NaN
 
 % -------- Select data to use (columns with 'Mean') ---------------
-Target_columns = int32([4,8,8,14]);
-Ignore_columns = int32([5,7,9,11,13]);
+Target_columns = int32([3,19]);
+Ignore_columns = int32([1,2]);
 T_Data = selectColumns (T_Original, Target_columns, Ignore_columns);
 Regions_unique = T_Data.Properties.VariableNames;
 nRegions = numel(Regions_unique);
 
 % ------- Define categorical variable ('Group') and its categories ----------
-Group = categorical(T_Original.Group);
-Group_categories = categories(Group);
-nGroup = numel(Group_categories);
+group_name = 'Genotipo';
+[Group, Group_categories, nGroup] = getCategoricalGroup(T_Original, group_name);
+
 
 % -------- Prepare numeric data (array format) for analysis ---------
 Data = table2array(T_Data);
@@ -68,8 +68,8 @@ T_posthoc_AllComparisons = posthoc1f_allcomparisons(Data, Group, Group_categorie
 writetable(T_posthoc_AllComparisons, [savePath 'Posthoc_AllComparisons.xlsx']);
 
 % ------------- Post-hoc - Comparisons against control (Dunnett or Dunn-Bonferroni vs. control) -------
-controlGroup1 = 'CTRL+VEH';
-controlGroup2 = 'PILO+VEH';
+controlGroup1 = 'WT';
+controlGroup2 = 'Het';
 [T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(Data, Group, Regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
 % Save results as .xlsx
 writetable(T_posthoc_vsControl1,[savePath 'Posthoc_vsControl1.xlsx']);
@@ -77,7 +77,7 @@ writetable(T_posthoc_vsControl2,[savePath 'Posthoc_vsControl2.xlsx']);
 
 
 %% --------------------- PLOT ----------------------------------
-Group = reordercats(Group, {'CTRL+VEH', 'PILO+VEH', 'CTRL+SP', 'PILO+SP'}); % Order in which groups should appear
+Group = reordercats(Group, {'WT', 'Het', 'Hom'}); % Order in which groups should appear
 Group_categories = categories(Group); % After reordering, refresh the group variable
 
 % Colors. Use the command `uisetcolor` to explore color values
@@ -192,10 +192,10 @@ end
 %end
 
 % Labels and title
-title('GFAP Immunofluorescence');
+title('FUS 18FDG-PET (normWB)');
 legend(Group_categories);
 xticklabels(T_Data.Properties.VariableNames);
 xticks(1:nRegions);
-xlabel('Microscopy images');
-ylabel('Fluorescence intensity (units)');
+xlabel('Brain Regions');
+ylabel('[1/1]');
 hold off
