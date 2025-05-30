@@ -29,25 +29,25 @@ T_Original = readtable(['./data/' fileName]);
 T_Original = rmmissing(T_Original);  % Remove rows that contain at least one NaN
 
 % -------- Select data to use (columns with 'Mean') ---------------
-Target_columns = int32([3,19]);
-Ignore_columns = int32([1,2]);
-T_Data = selectColumns (T_Original, Target_columns, Ignore_columns);
-Regions_unique = T_Data.Properties.VariableNames;
-nRegions = numel(Regions_unique);
+target_columns = int32([3,19]);
+ignore_columns = int32([1,2]);
+T_Data = selectColumns (T_Original, target_columns, ignore_columns);
+regions_unique = T_Data.Properties.VariableNames;
+nRegions = numel(regions_unique);
 
 % ------- Define categorical variable ('Group') and its categories ----------
 group_name = 'Genotipo';
-[Group, Group_categories, nGroup] = getCategoricalGroup(T_Original, group_name);
+[group, group_categories, nGroup] = getCategoricalGroup(T_Original, group_name);
 
 
 % -------- Prepare numeric data (array format) for analysis ---------
-Data = table2array(T_Data);
+data = table2array(T_Data);
 
 
 %% DESCRIPTIVE ANALYSIS
 
 % --------- Mean and standard deviation -----------------
-[T_descriptives, Mean_RegionGroup, SD_RegionGroup] = compute_descriptives(Data, Group, Group_categories, Regions_unique, nRegions, nGroup);
+[T_descriptives, mean_RegionGroup, sd_RegionGroup] = compute_descriptives(data, group, group_categories, regions_unique, nRegions, nGroup);
 % Save results as .xlsx
 writetable(T_descriptives, [savePath 'DescriptiveStatistics.xlsx']);
 
@@ -55,30 +55,30 @@ writetable(T_descriptives, [savePath 'DescriptiveStatistics.xlsx']);
 %% VARIANCE ANALYSIS - ANOVA 1F
 
 % ------------ Check normality and homogeneity ---------------
-ANOVA_friendly = checkANOVA1f(Data, Group, Group_categories);
+ANOVA_friendly = checkANOVA1f(data, group, group_categories);
 
 %------------- Analysis of variance (ANOVA or KRUSKAL-WALLIS)---------------
-[T_VarianceAnalysis, p_variance] = Variance1f_analysis(Data, Group, ANOVA_friendly, Regions_unique);
+[T_VarianceAnalysis, p_variance] = variance1f_analysis(data, group, ANOVA_friendly, regions_unique);
 % Save results as .xlsx
 writetable(T_VarianceAnalysis, [savePath 'VarianceAnalysis.xlsx']);
 
 % ------------- Post-hoc - All comparisons (Tukey or Dunn-Bonferroni) -------
-T_posthoc_AllComparisons = posthoc1f_allcomparisons(Data, Group, Group_categories, ANOVA_friendly, Regions_unique);
+T_posthoc_AllComparisons = posthoc1f_allcomparisons(data, group, group_categories, ANOVA_friendly, regions_unique);
 % Save results as .xlsx
 writetable(T_posthoc_AllComparisons, [savePath 'Posthoc_AllComparisons.xlsx']);
 
 % ------------- Post-hoc - Comparisons against control (Dunnett or Dunn-Bonferroni vs. control) -------
 controlGroup1 = 'WT';
 controlGroup2 = 'Het';
-[T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(Data, Group, Regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
+[T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(data, group, regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
 % Save results as .xlsx
 writetable(T_posthoc_vsControl1,[savePath 'Posthoc_vsControl1.xlsx']);
 writetable(T_posthoc_vsControl2,[savePath 'Posthoc_vsControl2.xlsx']);
 
 
 %% --------------------- PLOT ----------------------------------
-Group = reordercats(Group, {'WT', 'Het', 'Hom'}); % Order in which groups should appear
-Group_categories = categories(Group); % After reordering, refresh the group variable
+group = reordercats(group, {'WT', 'Het', 'Hom'}); % Order in which groups should appear
+group_categories = categories(group); % After reordering, refresh the group variable
 
 % Colors. Use the command `uisetcolor` to explore color values
 myColors = [...
@@ -93,37 +93,37 @@ myColorsDark = [...
     0.4196 0.0392 0.4392]; % dark purple
 
 % Bar plot
-GraphBar = bar(Mean_RegionGroup');
+graphBar = bar(mean_RegionGroup');
 for g = 1:nGroup
-    GraphBar(g).FaceColor = myColors(g,:);
-    GraphBar(g).EdgeColor = myColorsDark(g,:);
-    GraphBar(g).BarWidth = 0.85;
-    GraphBar(g).LineWidth = 1.5;
+    graphBar(g).FaceColor = myColors(g,:);
+    graphBar(g).EdgeColor = myColorsDark(g,:);
+    graphBar(g).BarWidth = 0.85;
+    graphBar(g).LineWidth = 1.5;
 end
 
 % Error bars
 hold on
 for g = 1:nGroup
-    x = GraphBar(g).XEndPoints;
-    y = GraphBar(g).YData;
-    e = SD_RegionGroup(g,:);
+    x = graphBar(g).XEndPoints;
+    y = graphBar(g).YData;
+    e = sd_RegionGroup(g,:);
     errorbar(x, y, e, 'k.', 'LineWidth', 1);
 end
 
 % Overlay individual data points
-nSubjects = size(Data, 1);
+nSubjects = size(data, 1);
 colors = lines(nGroup);  % Color map by group
 markerShapes = {'^', 'o', '^', 'o'};  % Marker shapes by group
 filledStatus = [false, false, true, true]; % filled or not
 for g = 1:nGroup
     % Extract individual data for group g
-    Data_gesima = Data(Group == Group_categories{g}, :);
+    data_gesima = data(group == group_categories{g}, :);
     % For each region (column)
     for r = 1:nRegions
         % X: the X position of the corresponding bar
-        xPos = GraphBar(g).XEndPoints(r);
+        xPos = graphBar(g).XEndPoints(r);
         % Y: the individual values
-        yVals = Data_gesima(:, r);
+        yVals = data_gesima(:, r);
         % Draw points
         marker = markerShapes{g};
         if filledStatus(g)
@@ -148,16 +148,16 @@ end
 for r = 1:nRegions
     if p_variance(r) < 0.01
         % Get max bar height in region r
-        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
         % Centered X position for the asterisk
-        xPos = mean(arrayfun(@(g) GraphBar(g).XEndPoints(r), 1:nGroup));
+        xPos = mean(arrayfun(@(g) graphBar(g).XEndPoints(r), 1:nGroup));
         % Add asterisk
         text(xPos, maxY + 0.13 * maxY, '**', 'FontSize', 30, 'HorizontalAlignment', 'center', 'Color', 'k');
     elseif p_variance(r) < 0.05
         % Get max bar height in region r
-        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
         % Centered X position for the asterisk
-        xPos = mean(arrayfun(@(g) GraphBar(g).XEndPoints(r), 1:nGroup));
+        xPos = mean(arrayfun(@(g) graphBar(g).XEndPoints(r), 1:nGroup));
         % Add asterisk
         text(xPos, maxY + 0.13 * maxY, '*', 'FontSize', 30, 'HorizontalAlignment', 'center', 'Color', 'k');
     end
@@ -167,10 +167,10 @@ end
 for r = 1:nRegions
     if p_variance(r) < 0.05
         % X positions for the line ends (first and last group bar)
-        xLeft = GraphBar(1).XEndPoints(r);
-        xRight = GraphBar(end).XEndPoints(r);
+        xLeft = graphBar(1).XEndPoints(r);
+        xRight = graphBar(end).XEndPoints(r);
         % Height (just below the asterisk)
-        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
         yBar = maxY + 0.11 * maxY;
         % Draw horizontal line
         plot([xLeft, xRight], [yBar, yBar], 'k-', 'LineWidth', 1.5);
@@ -181,10 +181,10 @@ end
 %for r = 1:nRegions
 %    if p_variance(r) < 0.05
         % X positions for the line ends (first and last group bar)
-%        xLeft = GraphBar(1).XEndPoints(r);
-%        xRight = GraphBar(end).XEndPoints(r);
+%        xLeft = graphBar(1).XEndPoints(r);
+%        xRight = graphBar(end).XEndPoints(r);
         % Height (just below the asterisk)
-%        maxY = max(Mean_RegionGroup(:, r) + SD_RegionGroup(:, r));
+%        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
 %        yBar = maxY + 0.11 * maxY;
         % Draw horizontal line
 %        plot([xLeft, xRight], [yBar, yBar], 'k-', 'LineWidth', 1.5);
@@ -193,7 +193,7 @@ end
 
 % Labels and title
 title('FUS 18FDG-PET (normWB)');
-legend(Group_categories);
+legend(group_categories);
 xticklabels(T_Data.Properties.VariableNames);
 xticks(1:nRegions);
 xlabel('Brain Regions');

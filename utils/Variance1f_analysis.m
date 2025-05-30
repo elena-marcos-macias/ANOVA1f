@@ -1,4 +1,4 @@
-function [T_VarianceAnalysis, p_values] = Variance1f_analysis(Data, Group, ANOVA_friendly, Regions_unique)
+function [T_VarianceAnalysis, p_values] = variance1f_analysis(Data, Group, ANOVA_friendly, Regions_unique)
 % VARIANCE_ANALYSIS Performs ANOVA or Kruskal-Wallis tests per region.
 %
 % PREREQUISITES: It must be used after the function 'checkANOVA1f' whose output is 'ANOVA_friendly'
