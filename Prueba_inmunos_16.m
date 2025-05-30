@@ -32,8 +32,9 @@ T_Original = readtable(['./data/' fileName]);
 T_Original = rmmissing(T_Original);  % Remove rows that contain at least one NaN
 
 % -------- Select data to use (columns with string or numerical criteria) ---------------
-target_columns = int32([3,19]);
-ignore_columns = int32([1,2]);
+target_columns = int32(json.inputDataSelection.columnCriteria.target_columns); % funcionan solo cuando lo que introduzco en el json son integers
+ignore_columns = int32(json.inputDataSelection.columnCriteria.ignore_columns); % funcionan solo cuando lo que introduzco en el json son integers
+    % el comando int32 hay que meterlo dentro de la función
 T_Data = selectColumns (T_Original, target_columns, ignore_columns);
 regions_unique = T_Data.Properties.VariableNames;
 nRegions = numel(regions_unique);
