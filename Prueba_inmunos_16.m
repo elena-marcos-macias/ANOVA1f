@@ -80,7 +80,8 @@ writetable(T_posthoc_vsControl2,[savePath char(json.outputFileNames.posthoc_vsCo
 
 
 %% --------------------- PLOT ----------------------------------
-group = reordercats(group, {'WT', 'Het', 'Hom'}); % Order in which groups should appear
+order = cellstr(string(json.inputDataSelection.groupOrder))';
+group = reordercats(group, order); % Order in which groups should appear
 group_categories = categories(group); % After reordering, refresh the group variable
 
 % Colors. Use the command `uisetcolor` to explore color values
