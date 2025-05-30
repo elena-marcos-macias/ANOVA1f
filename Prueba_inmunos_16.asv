@@ -71,12 +71,12 @@ T_posthoc_AllComparisons = posthoc1f_allcomparisons(data, group, group_categorie
 writetable(T_posthoc_AllComparisons, [savePath char(json.outputFileNames.posthoc_AllComparisons)]);
 
 % ------------- Post-hoc - Comparisons against control (Dunnett or Dunn-Bonferroni vs. control) -------
-controlGroup1 = char(json.inputDataSelection.groupControl.controlGroup1);
-controlGroup2 = char(json.inputDataSelection.groupControl.controlGroup2);
+controlGroup1 = 'WT';
+controlGroup2 = 'Het';
 [T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(data, group, regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
 % Save results as .xlsx
-writetable(T_posthoc_vsControl1,[savePath char(json.outputFileNames.posthoc_vsControl1)]);
-writetable(T_posthoc_vsControl2,[savePath char(json.outputFileNames.posthoc_vsControl2)]);
+writetable(T_posthoc_vsControl1,[savePath char(json.outputFileNames.descriptiveStatistic)]);
+writetable(T_posthoc_vsControl2,[savePath 'Posthoc_vsControl2.xlsx']);
 
 
 %% --------------------- PLOT ----------------------------------
@@ -195,10 +195,10 @@ end
 %end
 
 % Labels and title
-title(char(json.graphSpecifications.graphTitle));
+title('FUS 18FDG-PET (normWB)');
 legend(group_categories);
 xticklabels(T_Data.Properties.VariableNames);
 xticks(1:nRegions);
-xlabel(char(json.graphSpecifications.xAxisLabel));
-ylabel(char(json.graphSpecifications.yAxisLabel));
+xlabel('Brain Regions');
+ylabel('[1/1]');
 hold off
