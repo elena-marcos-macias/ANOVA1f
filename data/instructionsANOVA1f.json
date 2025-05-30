@@ -1,55 +1,29 @@
 {
-    "Ensemble": {
-        "Music": "jazz",
-        "BandName": "Kool Katz",
-        "Instrumentation": [
-            {
-                "Type": "wind",
-                "Instrument": "trumpet",
-            },
-            {
-                "Type": "percussion",
-                "Instrument": "piano",
-                "Pianotype": "concert grand",
-            },
-            {
-                "Type": "percussion",
-                "Instrument": "drums",
-                "Drumkit": [
-                    "bass drum",
-                    "floor tom",
-                    "snare drum",
-                    "hi-hat",
-                    "ride cymbal"
-                ],
-            },
-            {
-                "Type": "string",
-                "Instrument": "bass",
-                "Basstype": "upright"
-            }
-        ]
+   "inputDataSelection" :{
+        "fileName" : "FUS_20250526.xlsx",
+        "columnCriteria" : {
+                            "target_columns" : [3,19],
+                            "ignore_columns" : [1,2]
+                        },
+        "groupName" : "Genotipo",
+        "groupOrder" : ["WT",
+                        "Het",
+                        "Hom"],
+        "groupControl" : {
+                            "controlGroup1" : "WT",
+                            "controlGroup2" : "Het"
+                        }
+     },
+    "outputFileNames" : {
+        "descriptiveStatistics" : "DescriptiveStatistics.xlsx",
+        "varianceAnalysis" : "VarianceAnalysis.xlsx",
+        "posthoc_AllComparisons" : "Posthoc_AllComparisons.xlsx",
+        "posthoc_vsControl1" : "Posthoc_vsControl1.xlsx",
+        "posthoc_vsControl2" : "Posthoc_vsControl2.xlsx"
     },
-    "Musicians": [
-        {
-            "Role": "trumpeter",
-            "Name": "Miles"
-        },
-        {
-            "Role": "vocalist",
-            "Name": "Roger"
-        },
-        {
-            "Role": "pianist",
-            "Name": "Diana"
-        },
-        {
-            "Role": "drummer",
-            "Name": "George"
-        },
-        {
-            "Role": "bassist",
-            "Name": "John"
-        }
-    ]
+     "graphSpecifications" : {
+        "graphTitle" : "FUS 18FDG-PET (normWB)",
+        "xAxisLabel" : "Brain Regions",
+        "yAxisLabel" : "[1/1]"
+    }                    
 }

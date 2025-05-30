@@ -22,10 +22,10 @@ addpath ('./utils');
 savePath = './results/';
 
 % --------- Read instructions JSON archive -----------
-S = readstruct("data/instructionsANOVA1f.json");
+Test = readstruct("data/instructionsANOVA1f.json");
 
 %--------- Load data ---------
-fileName = S.inputDataSelection.fileName;
+fileName = char(Test.inputDataSelection.fileName);
 T_Original = readtable(['./data/' fileName]);
 
 % -------- Remove rows with NaN --------
