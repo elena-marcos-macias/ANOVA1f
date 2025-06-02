@@ -14,9 +14,9 @@ function T_Data = selectColumns (T_Original, Target_columns, Ignore_columns)
 
 
 
-    if ischar (Target_columns)
+    if ischar (Target_columns) || isstring (Target_columns)
         T_Data = T_Original(:,contains(T_Original.Properties.VariableNames,Target_columns));
-    elseif isvector (Target_columns) & isinteger (Target_columns) & isvector (Ignore_columns) & isinteger (Ignore_columns)
+    elseif isvector (Target_columns) & (mod(Target_columns, 1) == 0) & isvector (Ignore_columns) & (mod(Ignore_columns, 1) == 0)
         assert (mod(length (Target_columns),2) == 0, 'Error in Target_columns: indices must be provided in pairs')
         aux = [];
         for i = 1:2:length(Target_columns)
