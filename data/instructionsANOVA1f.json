@@ -19,7 +19,8 @@
         "varianceAnalysis" : "VarianceAnalysis.xlsx",
         "posthoc_AllComparisons" : "Posthoc_AllComparisons.xlsx",
         "posthoc_vsControl1" : "Posthoc_vsControl1.xlsx",
-        "posthoc_vsControl2" : "Posthoc_vsControl2.xlsx"
+        "posthoc_vsControl2" : "Posthoc_vsControl2.xlsx",
+        "graphBar" : "Graph_MeanSDANOVA.fig"
     },
      "graphSpecifications" : {
         "graphTitle" : "FUS 18FDG-PET (normWB)",
