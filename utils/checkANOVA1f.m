@@ -22,7 +22,7 @@ for r = 1:nRegions
     allGroupsNormal = true;
 
     for g = 1:nGroup % The normality test is per region and per group
-        Data_group = Data(Group == Group_categories{g}, r);
+        Data_group = Data(Group == Group_categories(g), r);
         [h, ~] = swtest(Data_group, 0.05);
         if h == 1 % H0 = the data follow a normal distribution; h = 1 discards the H0
             allGroupsNormal = false;

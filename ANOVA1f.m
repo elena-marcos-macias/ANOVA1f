@@ -49,6 +49,10 @@ data = table2array(T_Data);
 
 %% DESCRIPTIVE ANALYSIS
 
+order = cellstr(string(json.inputDataSelection.groupOrder))';
+group = reordercats(group, order); % Order in which groups should appear
+group_categories = categories(group); % After reordering, refresh the group variable
+
 % --------- Mean and standard deviation -----------------
 [T_descriptives, mean_RegionGroup, sd_RegionGroup] = compute_descriptives(data, group, group_categories, regions_unique, nRegions, nGroup);
 % Save results as .xlsx
@@ -56,6 +60,10 @@ writetable(T_descriptives, [savePath char(json.outputFileNames.descriptiveStatis
 
 
 %% VARIANCE ANALYSIS - ANOVA 1F
+
+order = cellstr(string(json.inputDataSelection.groupOrder))';
+group = reordercats(group, order); % Order in which groups should appear
+group_categories = categories(group); % After reordering, refresh the group variable
 
 % ------------ Check normality and homogeneity ---------------
 ANOVA_friendly = checkANOVA1f(data, group, group_categories);

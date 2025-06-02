@@ -30,8 +30,8 @@ function T_posthoc_AllComparisons = posthoc1f_allcomparisons(Data, Group, Group_
             for row = 1:size(result_multcompare, 1)
                 idx1 = result_multcompare(row, 1);
                 idx2 = result_multcompare(row, 2);
-                Group1_name = Group_categories{idx1};
-                Group2_name = Group_categories{idx2};
+                Group1_name = Group_categories(idx1);
+                Group2_name = Group_categories(idx2);
                 p_Tukey = result_multcompare(row, 6);
 
                 posthoc_AllComparisons = [posthoc_AllComparisons; ...
@@ -44,13 +44,13 @@ function T_posthoc_AllComparisons = posthoc1f_allcomparisons(Data, Group, Group_
 
             for i = 1:nGroup-1
                 for j = i+1:nGroup
-                    Data_i = Data_resima(Group == Group_categories{i});
-                    Data_j = Data_resima(Group == Group_categories{j});
+                    Data_i = Data_resima(Group == Group_categories(i));
+                    Data_j = Data_resima(Group == Group_categories(j));
                     p_raw = ranksum(Data_i, Data_j);
                     p_Dunn = min(p_raw * numPairs, 1); % Bonferroni correction
 
                     posthoc_AllComparisons = [posthoc_AllComparisons; ...
-                        {RegionName, Group_categories{i}, Group_categories{j}, 'Dunn-Bonferroni', p_Dunn}];
+                        {RegionName, Group_categories(i), Group_categories(j), 'Dunn-Bonferroni', p_Dunn}];
                 end
             end
         end

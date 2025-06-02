@@ -34,7 +34,7 @@ function [T_descriptives, Mean_RegionGroup, SD_RegionGroup] = compute_descriptiv
     for r = 1:nRegions
         RegionName = Regions_unique{r};
         for g = 1:nGroup
-            GroupName = Group_categories{g};
+            GroupName = Group_categories(g);
             Data_g_r = Data(Group == GroupName, r);
 
             mean_val = mean(Data_g_r);
