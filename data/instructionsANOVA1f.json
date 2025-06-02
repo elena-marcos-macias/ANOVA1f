@@ -1,6 +1,6 @@
 {
    "inputDataSelection" :{
-        "fileName" : "FUS_diet_20250602.xlsx",
+        "fileName" : "FUS_20250527.xlsx",
         "columnCriteria" : {
                             "target_columns" : [3,19],
                             "ignore_columns" : [1,2]
@@ -22,7 +22,7 @@
         "posthoc_vsControl2" : "Posthoc_vsControl2.xlsx"
     },
      "graphSpecifications" : {
-        "graphTitle" : "FUS_diet 18FDG-PET (normWB)",
+        "graphTitle" : "FUS 18FDG-PET (normWB)",
         "xAxisLabel" : "Brain Regions",
         "yAxisLabel" : "[1/1]"
     }                    

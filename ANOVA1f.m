@@ -19,6 +19,7 @@
 
 %--------- Add function path and set save path ----------
 addpath ('./utils');
+addpath ('./requirements');
 savePath = './results/';
 
 % --------- Read instructions JSON archive -----------
