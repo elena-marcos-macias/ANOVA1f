@@ -15,13 +15,16 @@ Este código esta pensado para realizar un análisis de varianza de tipo ANOVA d
   - Archivo de MATLAB "ANOVA1f.m" : archivo con el código a ejecutar.
   - Archivo "README.md".
   - Puede haber otros archivos que no son relevantes para el usuario. No los borre.
- ## Inportar los datos a analizar
+ ## Importar los datos a analizar
  Abre la carpeta "data" y copia el archivo Excel con tus datos.
  ## Modificar el archivo .json
- En la carpeta "data" abre el archivo "instructionsANOVA1f.json". Si no tienes un editor de código hazlo con el block de notas. Verás la siguiente estructura:
+ En la carpeta "data" abre el archivo "instructionsANOVA1f.json". Si no tienes un editor de código (yo he usado VisualStudio) hazlo con el block de notas. Verás la siguiente estructura:
  
-  ![image](https://github.com/user-attachments/assets/444dc0ea-cee4-4b63-8613-408184fab314)
-  
- NO MODIFIQUES NINGÚN ELEMENTO A LA IZQUIERDA DE LOS DOS PUNTOS ( : ). 
+   ![image](https://github.com/user-attachments/assets/444dc0ea-cee4-4b63-8613-408184fab314)
+   
  A continuación iremos viendo paso por paso como modificar el archivo .json:
-   1. 
+   1. Conceptos previos:
+      - NO MODIFIQUES NINGÚN ELEMENTO A LA IZQUIERDA DE LOS DOS PUNTOS ( : ). Los elementos a la derecha de los dos puntos son modificables. Si lo que vas a introducir es texto siempre debe ir entre comillas (*por ejemplo "FUS_20250527.xlsx"*) y si por el contrario son números deben ir entre corchetes (*por ejemplo [3,19]*).
+      - Si te fijas los elementos estan organizados en bloques separados por llaves ( {} ). Todos los elementos dentro de un mismo bloque deben estar separados por comas ( , ) salvo el último.
+   3. "fileName" : nombre del archivo Excel que previamente has copiado en la carpeta "data". Es importante que esté escrito exactamente igual, incluida la extensión (.xlsx). Mi recomendación es que lo copies y lo pegues en lugar de escribirlo.
+   4. "target_columns" : 
