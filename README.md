@@ -43,3 +43,8 @@ Este código esta pensado para realizar un análisis de varianza de tipo ANOVA d
    11. "posthoc_vsControl1" : nombre que queremos darle al archivo excel que contiene los datos de los post hoc tipo Dunnet y su alternativa no paramétrica contra el grupo que hayamos establecido como "controlGroup1". Importante incluir la extensión (.xlsx). El programa devuelve el valor de la p y si este es significativo o no.
    12. "posthoc_vsControl2" : nombre que queremos darle al archivo excel que contiene los datos de los post hoc tipo Dunnet y su alternativa no paramétrica contra el grupo que hayamos establecido como "controlGroup2". Importante incluir la extensión (.xlsx). El programa devuelve el valor de la p y si este es significativo o no.
    13. "graphBar" : nombre que queremos darle al archivo de figura de MATLAB. Importante incluir la extensión (.fig). Con "graphTiltle" se específica el título del gráfico y con "xAxisLabel" y "yAxisLabel" los títulos de los ejes x e y respectivamente. ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
+Una vez modificadas todas las variables necesarias guardar el archivo .json. No es necesario cerrar para ejecutar el código correctamente pero si guardar.
+## Ejecutar el script
+En la carpeta principal abrir el archivo de MATLAB "ANOVA1f.m" y ejecutar (botón de RUN).
+## Extraer los resultados
+En la carpeta "results" deberían haber aparecido tantos exceles como archivos .xlsx hubieses nombrado en el apartado "outputFileNames" del .json y un archivo .fig con el gráfico de MATLAB. Este ultimo archivo es modificable para poder personalizar las longitudes de los ejes, si se quiere o no escala, etc.
