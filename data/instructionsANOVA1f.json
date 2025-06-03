@@ -2,7 +2,7 @@
    "inputDataSelection" :{
         "fileName" : "FUS_20250527.xlsx",
         "columnCriteria" : {
-                            "target_columns" : [3,19],
+                            "target_columns" : [3,21],
                             "ignore_columns" : [1,2]
                         },
         "groupName" : "Genotipo",
