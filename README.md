@@ -1,50 +1,97 @@
 # ReadMe
-Este código esta pensado para realizar un análisis de varianza de tipo ANOVA de 1 factor intersujeto con hasta 4 niveles de factor o sus alternativas no paramétricas (no se ha probado con más de 4 niveles por el momento). Es decir, comparará los datos relativos a los distintos grupos experimentales entre si para una variable, pero no comparará entre variables.
-## Pre-requisitos
-- Tener instalado MATLAB (el código fué hecho con MATLAB R2024a).
-- Tener los datos a analizar en una única hoja de un archivo Excel (.xlsx). El nombre del archivo no debe contenter espacios, signos de puntuación o caracteres especiales. La primera fila del archivo se corresponderá con los nombres de las variables y a partir de ahí cada fila será un sujeto del estudio. Cada columna se corresponderá con una variable a analizar. Es necesario que una de estas variables sea una variable categórica, es decir, una variable de agrupación en función de la que se va a distinguir a que grupo pertenece cada sujeto (*en este caso "Genotipo", en la columna A, será nuestra variable categórica*). ![image](https://github.com/user-attachments/assets/dec0a335-7cd0-432e-861e-5406c4d53b3e)
-## Descarga del repositorio
-- Descarga el .zip desde la opción "CODE > Local > Download ZIP" y guárdalo en tu PC.
-- Descomprime el archivo. Al hacerlo deberías encontrar la siguiente estructura:
-  - 📁 data: única carpeta a modificar por el ususario.
-    - Archivo "instructionsANOVA1f.json" es un archivo de texto que deberás modificar.
-    - Aquí deberás pegar el Excel con tus datos.
-  - 📁 requirements: funciones ajenas necesarias para el funcionamiento del código.
-  - 📁 results: aquí se generarán los archivos Excel (.xlsx) y figuras de MATLAB (.fig) resultantes del análisis.
-  - 📁 utils: funciones propias necesarias para el funcionamiento del código.
-  - Archivo de MATLAB "ANOVA1f.m" : archivo con el código a ejecutar.
-  - Archivo "README.md".
-  - Puede haber otros archivos que no son relevantes para el usuario. No los borre.
- ## Importar los datos a analizar
- Abre la carpeta "data" y copia el archivo Excel con tus datos.
- ## Modificar el archivo .json
- En la carpeta "data" abre el archivo "instructionsANOVA1f.json". Si no tienes un editor de código (yo he usado VisualStudio) hazlo con el block de notas. Verás la siguiente estructura:
- 
-   ![image](https://github.com/user-attachments/assets/444dc0ea-cee4-4b63-8613-408184fab314)
-   
- A continuación iremos viendo paso por paso como modificar el archivo .json:
-   1. Conceptos previos:
-      - NO MODIFIQUES NINGÚN ELEMENTO A LA IZQUIERDA DE LOS DOS PUNTOS ( : ). Los elementos a la derecha de los dos puntos son modificables. Si lo que vas a introducir es texto, siempre debe ir entre comillas (*por ejemplo "FUS_20250527.xlsx"*). Si por el contrario son números, deben ir entre corchetes (*por ejemplo [3,19]*).
-      - Si te fijas los elementos estan organizados en bloques separados por llaves ( { } ) o corchetes ( [ ] ), NO LOS MODIFIQUES. Todos los elementos dentro de un mismo bloque deben estar separados por comas ( , ) salvo el último.
-   2. "fileName" : nombre del archivo Excel que previamente has copiado en la carpeta "data". Es importante que esté escrito exactamente igual, incluida la extensión (.xlsx). Mi recomendación es que lo copies y lo pegues en lugar de escribirlo.
-   4. "columnCriteria" : criterio que le permitirá al programa distinguir entre aquellas columnas del excel que contienen datos con los que debe operar frente a los que no. Las columnas con la variable categórica o el ID de los sujetos NO se consideran datos con los que se vaya a operar.
-      - "target_columns" : aquellas que contienen datos con los que SI se va a operar. Puede rellenarse de dos maneras:
-          - Texto: palabra que compartan todas las columnas a utilizar, deben coincidir también mayúsculas y minúsculas. *Por ejemplo, si quiero distinguir entre columnas que contengan datos de media que se llamen Mean_1, Mean_2, ..., Mean_n; escribiré el string "Mean" entrecomillado.*
-          - Números: debemos indicar los intervalos de columnas entre los que se encuentran los datos. Los números siempre se introducirán por pares, siendo siempre el primer número el número de columna en el que se inicia el intervalo y el segundo el número en el que se termina. *Por ejemplo, si los datos están entre la columna C y la H y entre la M y la U tendría que introducir [3,8,13,21].*
-      - "ignore_columns" : aquellas que contienen datos con los que NO se van a operar. Puede rellenarse de dos maneras:
-          - Texto: seran aquellas que no contengan el string que se haya introducido como target. En este caso rellenar con *"None"*.
-          - Números: también debemos indicar los intervalos de columnas que queremos ignorar. Los números siempre se introducirán por pares, siendo siempre el primer número el número de columna en el que se inicia el intervalo y el segundo el número en el que se termina. *Por ejemplo, si los datos están entre la columna A y la B y entre la I y la L tendría que introducir [1,2,9,12].*
-   5. "groupName" : nombre de la variable de agrupación. Tiene que coincidir con el encabezado de la columna que contenga dicha variable. *En el caso de los datos que se presentaban al principio sería la columna A, "Genotipo".*
-   6. "groupOrder" : categorías de la variable de agrupación, en el orden en el que quieres que se representen los datos en el gráfico. Puedes incluir hasta 4. *Por ejemplo, para representar 1º WT, 2º Het y 3º Hom, escribiríamos ["WT", "Het", "Hom"].*
-   7. "groupControl" : estas variables, "controlGroup1" y "controlGroup2" definen aquellos grupos que van a ser definidos como controles para el análisis posthoc de tipo Dunnet y su alternativa no paramétrica.
-   8. "descriptiveStatistics" : nombre que queremos darle al archivo excel que contiene los datos de la estadística descriptiva. Importante incluir la extensión (.xlsx). El programa devuelve el número de muestras por grupo, la media y la desviación estandar.
-   9. "varianceAnalysis" : nombre que queremos darle al archivo excel que contiene los datos de la estadística descriptiva. Importante incluir la extensión (.xlsx). El programa devuelve el estadístico F para aquellas comparaciones en las que se puedo hacer ANOVA y Chi^2 para aquellas en las que se realizó la alternativa no paramétrica, además devuleve el valor de la p y si este es significativo o no.
-   10. "posthoc_AllComparisons" : nombre que queremos darle al archivo excel que contiene los datos de los post hoc tipo Tukey y su alternativa no paramétrica. Importante incluir la extensión (.xlsx). El programa devuelve el valor de la p y si este es significativo o no.
-   11. "posthoc_vsControl1" : nombre que queremos darle al archivo excel que contiene los datos de los post hoc tipo Dunnet y su alternativa no paramétrica contra el grupo que hayamos establecido como "controlGroup1". Importante incluir la extensión (.xlsx). El programa devuelve el valor de la p y si este es significativo o no.
-   12. "posthoc_vsControl2" : nombre que queremos darle al archivo excel que contiene los datos de los post hoc tipo Dunnet y su alternativa no paramétrica contra el grupo que hayamos establecido como "controlGroup2". Importante incluir la extensión (.xlsx). El programa devuelve el valor de la p y si este es significativo o no.
-   13. "graphBar" : nombre que queremos darle al archivo de figura de MATLAB. Importante incluir la extensión (.fig). Con "graphTiltle" se específica el título del gráfico y con "xAxisLabel" y "yAxisLabel" los títulos de los ejes x e y respectivamente. ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
-Una vez modificadas todas las variables necesarias guardar el archivo .json. No es necesario cerrar para ejecutar el código correctamente pero si guardar.
-## Ejecutar el script
-En la carpeta principal abrir el archivo de MATLAB "ANOVA1f.m" y ejecutar (botón de RUN).
-## Extraer los resultados
-En la carpeta "results" deberían haber aparecido tantos exceles como archivos .xlsx hubieses nombrado en el apartado "outputFileNames" del .json y un archivo .fig con el gráfico de MATLAB. Este ultimo archivo es modificable para poder personalizar las longitudes de los ejes, si se quiere o no escala, etc.
+
+This code is designed to perform a one-way between-subjects ANOVA with up to four factor levels, or its non-parametric alternatives (note: functionality has not yet been tested for more than four levels). In other words, it compares data across different experimental groups for a single variable, but it does **not** compare across different variables.
+
+## Prerequisites
+
+- MATLAB must be installed (this code was developed using MATLAB R2024a).
+- The data to be analyzed must be contained in a single sheet of an Excel file (.xlsx). The file name must **not** contain spaces, punctuation marks, or special characters.  
+  - The **first row** of the file must contain the variable names.  
+  - Each **subsequent row** corresponds to one subject in the study.  
+  - Each **column** represents a variable to be analyzed.  
+  - One of the variables must be a **categorical grouping variable**, which is used to determine each subject’s group membership. *In this case, the variable “Genotipo” in column A serves as the categorical variable.*  
+  ![image](https://github.com/user-attachments/assets/dec0a335-7cd0-432e-861e-5406c4d53b3e)
+
+## Downloading the Repository
+
+- Download the `.zip` file using the "CODE > Local > Download ZIP" option and save it to your computer.
+- Extract the contents of the `.zip` file. The directory should contain the following structure:
+
+  - 📁 `data`: the only folder the user needs to modify.
+    - The file `instructionsANOVA1f.json` is a text file that **must** be edited by the user.
+    - Paste your Excel file with the data into this folder.
+  - 📁 `requirements`: external functions necessary for the script to run.
+  - 📁 `results`: output folder where the resulting Excel (.xlsx) and MATLAB figure (.fig) files will be saved.
+  - 📁 `utils`: internal functions required for the script.
+  - `ANOVA1f.m`: the main MATLAB script to be executed.
+  - `README.md`: this documentation file.
+  - There may be additional files not relevant to the user. **Do not delete them.**
+
+## Importing the Data
+
+Open the `data` folder and copy your Excel data file into it.
+
+## Editing the JSON File
+
+Within the `data` folder, open the file `instructionsANOVA1f.json`. If you do not have a code editor (such as Visual Studio Code), you may use Notepad. You will see a structure similar to this:
+
+![image](https://github.com/user-attachments/assets/444dc0ea-cee4-4b63-8613-408184fab314)
+
+Follow these steps to modify the JSON file appropriately:
+
+1. **Preliminary Notes:**
+   - **Do not edit** any element to the **left** of the colons (`:`). Only modify the elements on the **right**.
+   - If the element is **text**, it must be enclosed in double quotation marks (e.g., `"FUS_20250527.xlsx"`).
+   - If the element is **numeric**, it must be enclosed in square brackets (e.g., `[3, 19]`).
+   - The elements are organized in blocks enclosed in curly braces `{}` or square brackets `[]`—**do not alter** this structure.
+   - Elements within the same block must be separated by commas `,`, **except the last one**.
+
+2. **"fileName"**: The name of the Excel file you copied into the `data` folder. It must match exactly, including the `.xlsx` extension. It is recommended to copy and paste the file name rather than typing it manually.
+
+3. **"columnCriteria"**: Criteria for distinguishing columns that contain data that is going to be used to mathematically operate from those that do not (e.g., grouping variable or subject ID columns).
+
+   - **"target_columns"**: Specifies the columns to be analyzed. Two methods are available:
+     - **Text**: A shared keyword present in all column names to be included (case-sensitive).  
+       *Example: if columns are named Mean_1, Mean_2, ..., use `"Mean"`.*
+     - **Numeric**: Specify the column ranges using pairs of numbers (start and end column indices).  
+       *Example: to include columns C–H and M–U, write `[3,8,13,21]`.*
+
+   - **"ignore_columns"**: Specifies the columns to exclude from analysis. Two options:
+     - **Text**: If using the text method above for target columns, enter `"None"`.
+     - **Numeric**: Specify the ranges of columns to be ignored using pairs of indices.  
+       *Example: to ignore columns A–B and I–L, write `[1,2,9,12]`.*
+
+4. **"groupName"**: Name of the grouping variable. This must match the column header in the Excel file.  
+   *In the example data, this would be column A, labeled "Genotipo".*
+
+5. **"groupOrder"**: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories).  
+   *Example: `["WT", "Het", "Hom"]`.*
+
+6. **"groupControl"**: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
+
+7. **"descriptiveStatistics"**: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
+   The output includes group sample sizes, means, and standard deviations.
+
+8. **"varianceAnalysis"**: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
+
+9. **"posthoc_AllComparisons"**: File name (including `.xlsx` extension) for the output Excel file containing results from Tukey’s post-hoc test (and non-parametric alternative). Includes p-values and significance indicators.
+
+10. **"posthoc_vsControl1"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative). Includes p-values and significance indicators.
+
+11. **"posthoc_vsControl2"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative). Includes p-values and significance indicators.
+
+12. **"graphBar"**: File name (with `.fig` extension) for the MATLAB figure output.  
+    - `"graphTitle"`: title of the graph.  
+    - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.  
+    ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
+
+Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
+
+## Running the Script
+
+Open the `ANOVA1f.m` script in the main directory using MATLAB and run it by clicking the **RUN** button.
+
+## Retrieving the Results
+
+In the `results` folder, you should find as many Excel files as specified in the `outputFileNames` section of the `.json` file, along with a `.fig` file containing the MATLAB graph.  
+This figure is fully editable and can be customized (e.g., axis scaling, labels, appearance, etc.).
