@@ -64,7 +64,7 @@ Follow these steps to modify the JSON file appropriately:
 4. **"groupName"**: Name of the grouping variable. This must match the column header in the Excel file.  
    *In the example data, this would be column A, labeled "Genotipo".*
 
-5. **"groupOrder"**: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories).  
+5. **"groupOrder"**: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not. (I want to change it so that you can select some categories and not necessarily all of them)**
    *Example: `["WT", "Het", "Hom"]`.*
 
 6. **"groupControl"**: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
