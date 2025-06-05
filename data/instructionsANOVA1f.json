@@ -1,6 +1,6 @@
 {
    "inputDataSelection" :{
-        "fileName" : "FUS_20250527.xlsx",
+        "fileName" : "FUS_test6.xlsx",
         "columnCriteria" : {
                             "target_columns" : [3,21],
                             "ignore_columns" : [1,2]
