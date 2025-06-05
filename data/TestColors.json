@@ -1,0 +1,17 @@
+{
+   "graphSpecifications": {
+            "Group1" :{
+                "fillColor" : "white",
+                "lineColor" : "gray",
+                "markerShape" : "^",
+                "filledStatus" : "true"
+                },
+            "Group2" :{
+                "fillColor" : "A",
+                "lineColor" : "B",
+                "markerShape" : "o",
+                "filledStatus" : "false"
+                }       
+   }
+            
+}
