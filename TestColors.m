@@ -9,13 +9,21 @@ colorMap("gray") = [0.71 0.71 0.71];
 colorMap("grayDark1") = [0.5 0.5 0.5];
 colorMap("grayDark2") = [0.4000 0.3647 0.3647];
 colorMap("black") = [0 0 0];
-colorMap("yellow") = [0.9686 0.9294 0.3686];
-colorMap("yellowDark") = [0.7882 0.6902 0.0549];
+colorMap("yellowLight2") = [0.9882 0.9882 0.5922];
+colorMap("yellowLight1") = [0.9686 0.9294 0.3686];
+colorMap("yellow") = [1.0000 0.9490 0.2196];
+colorMap("yellowDark1") = [0.8784 0.8392 0.2549];
+colorMap("yellowDark2") = [0.7882 0.6902 0.0549];
 colorMap("purpleLight2") = [0.9216 0.7098 1.0000];
 colorMap("purpleLight1") = [0.8745 0.4235 0.9020];
 colorMap("purple") = [0.8078 0.3686 0.9686];
 colorMap("purpleDark1") = [0.6902 0.1098 0.9020];
 colorMap("purpleDark2") = [0.4196 0.0392 0.4392];
+colorMap("blueLight2") = [0.8000 0.9294 0.9059];
+colorMap("blueLight1") = [0.6314 0.9412 0.8824];
+colorMap("blue") = [0.3569 0.9412 0.8314];
+colorMap("blueDark1") = [0.1059 0.8196 0.6902];
+colorMap("blueDark2") = [0.0549 0.6706 0.5569];
 
 
 % Inicializar matriz vacía para los colores
@@ -47,18 +55,27 @@ testColors = [
     0.5 0.5 0.5;            %grayDark1
     0.4000 0.3647 0.3647;   %grayDark2
     0 0 0;                  %black
-    0.9686 0.9294 0.3686;   %yellow
-    0.7882 0.6902 0.0549;   %yellowDark
+    0.9882 0.9882 0.5922;   %yellowLight2
+    0.9686 0.9294 0.3686;   %yellowLight1
+    1.0000 0.9490 0.2196;   %yellow
+    0.8784 0.8392 0.2549;   %yellowDark1
+    0.7882 0.6902 0.0549;   %yellowDark2
     0.9216 0.7098 1.0000;   %purpleLight2
     0.8745 0.4235 0.9020;   %purpleLight1
     0.8078 0.3686 0.9686;   %purple
     0.6902 0.1098 0.9020;   %purpleDark1
-    0.4196 0.0392 0.4392    %purpleDark2
+    0.4196 0.0392 0.4392;   %purpleDark2
+    0.8000 0.9294 0.9059;   %blueLight2
+    0.6314 0.9412 0.8824;   %blueLight1
+    0.3569 0.9412 0.8314;   %blue
+    0.1059 0.8196 0.6902;   %blueDark1
+    0.0549 0.6706 0.5569    %blueDark2
 ];
 
 colorNames = ["white", "grayLight", "gray","grayDark1","grayDark2", "black",...
-    "yellow", "yellowDark",...
-    "purpleLight2", "purpleLight1", "purple", "purpleDark1", "purpleDark2"];  % nombres asociados a cada color
+    "yellowLight2", "yellowLight1" "yellow", "yellowDark1", "yellowDark1",...
+    "purpleLight2", "purpleLight1", "purple", "purpleDark1", "purpleDark2",...
+    "blueLight2", "blueLight1", "blue", "blueDark1", "blueDark2"];  % nombres asociados a cada color
 
 
 n = size(testColors, 1);
