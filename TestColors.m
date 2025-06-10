@@ -1,7 +1,9 @@
 % --------- Read instructions JSON archive -----------
 json = readstruct("data/TestColors.json");
 
-% Define color mappings
+
+%% Define color mappings
+
 colorMap = containers.Map;
 colorMap("white") = [1 1 1];
 colorMap("grayLight") = [0.8706 0.8706 0.8706];
@@ -26,18 +28,18 @@ colorMap("blueDark1") = [0.1059 0.8196 0.6902];
 colorMap("blueDark2") = [0.0549 0.6706 0.5569];
 
 
-% Inicializar matriz vacía para los colores
-testColors = [];
-
 % Lista de nombres de grupo posibles
-groupNames = ["Group1", "Group2", "Group3"];
+groupNames = ["Group1", "Group2", "Group3", "Group4", "Group5", "Group6", "Group7", "Group8"];
+
+% Inicializar matriz vacía para los colores de relleno
+fillColorMatrix = [];
 
 for i = 1:length(groupNames)
     groupName = groupNames(i);
     if isfield(json.graphSpecifications, groupName)
         fillColor = json.graphSpecifications.(groupName).fillColor;
         if isKey(colorMap, fillColor)
-            testColors(end+1, :) = colorMap(fillColor);  % añadir fila RGB
+            fillColorMatrix(end+1, :) = colorMap(fillColor);  % añadir fila RGB
         else
             warning("Color '%s' no está definido en el mapa de colores.", fillColor);
         end
@@ -47,8 +49,26 @@ for i = 1:length(groupNames)
     end
 end
 
-%%
-testColors = [
+% Inicializar matriz vacía para los colores de borde
+lineColorMatrix = [];
+
+for i = 1:length(groupNames)
+    groupName = groupNames(i);
+    if isfield(json.graphSpecifications, groupName)
+        lineColor = json.graphSpecifications.(groupName).lineColor;
+        if isKey(colorMap, lineColor)
+            lineColorMatrix(end+1, :) = colorMap(lineColor);  % añadir fila RGB
+        else
+            warning("Color '%s' no está definido en el mapa de colores.", lineColor);
+        end
+    else
+        % Grupo no presente, continuar sin error
+        fprintf("Grupo %s no encontrado en JSON. Ignorado.\n", groupName);
+    end
+end
+
+%% Create a color canvas in order to name the colors in the JSON archive
+ColorMatrix = [
     1 1 1;                  %white
     0.8706 0.8706 0.8706;   %grayLight
     0.71 0.71 0.71;         %gray
@@ -78,14 +98,14 @@ colorNames = ["white", "grayLight", "gray","grayDark1","grayDark2", "black",...
     "blueLight2", "blueLight1", "blue", "blueDark1", "blueDark2"];  % nombres asociados a cada color
 
 
-n = size(testColors, 1);
+n = size(ColorMatrix, 1);
 
 figure;
 hold on;
 
 for i = 1:n
     % Dibujar cada bloque de color
-    rectangle('Position', [i, 0, 1, 1], 'FaceColor', testColors(i,:), 'EdgeColor', 'none');
+    rectangle('Position', [i, 0, 1, 1], 'FaceColor', ColorMatrix(i,:), 'EdgeColor', 'none');
     
     % Escribir nombre rotado 45°
     text(i + 0.5, -0.1, colorNames(i), ...
