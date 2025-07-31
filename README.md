@@ -6,7 +6,7 @@ This code is designed to perform a one-way between-subjects ANOVA with up to fou
 
 - MATLAB must be installed (this code was developed using MATLAB R2024a).
 - The data to be analyzed must be contained in a single sheet of an Excel file (.xlsx). The file name must **not** contain spaces, punctuation marks, or special characters.  
-  - **NO cells should be empty** unless the whole row is to be discarded. This scripts completely deletes a row if any of its cells are empty.
+  - **NO cells should be empty** unless the whole row is to be discarded. This script completely deletes a row if any of its cells are empty.
   - The **first row** of the file must contain the variable names.  
   - Each **subsequent row** corresponds to one subject in the study.  
   - Each **column** represents a variable to be analyzed.  
@@ -38,7 +38,8 @@ Open the `data` folder and copy your Excel data file into it.
 
 Within the `data` folder, open the file `instructionsANOVA1f.json`. If you do not have a code editor (such as Visual Studio Code), you may use Notepad. You will see a structure similar to this:
 
-![image](https://github.com/user-attachments/assets/444dc0ea-cee4-4b63-8613-408184fab314)
+<img width="945" height="915" alt="image" src="https://github.com/user-attachments/assets/8d2cc5fe-96ff-4062-acb7-0bdd828cb351" />
+
 
 Follow these steps to modify the JSON file appropriately:
 
@@ -57,12 +58,12 @@ Follow these steps to modify the JSON file appropriately:
      - **Text**: A shared keyword present in all column names to be included (case-sensitive).  
        *Example: if columns are named Mean_1, Mean_2, ..., use `"Mean"`.*
      - **Numeric**: Specify the column ranges using pairs of numbers (start and end column indices).  
-       *Example: to include columns C–H and M–U, write `[3,8,13,21]`.*
+       *Example: to include columns D–I and N–V, write `[4,9,14,22]`.*
 
    - **"ignore_columns"**: Specifies the columns to exclude from analysis. Two options:
      - **Text**: If using the text method above for target columns, enter `"None"`.
      - **Numeric**: Specify the ranges of columns to be ignored using pairs of indices.  
-       *Example: to ignore columns A–B and I–L, write `[1,2,9,12]`.*
+       *Example: to ignore columns A–C and J–M, write `[1,3,10,13]`.*
 
 4. **"groupName"**: Name of the grouping variable. This must match the column header in the Excel file.  
    *In the example data, this would be column A, labeled "Genotipo".*
@@ -85,7 +86,8 @@ Follow these steps to modify the JSON file appropriately:
 
 12. **"graphBar"**: File name (with `.fig` extension) for the MATLAB figure output.  
     - `"graphTitle"`: title of the graph.  
-    - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.  
+    - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
+    - `"showDead"´:
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
 Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
