@@ -10,7 +10,8 @@ This code is designed to perform a one-way between-subjects ANOVA with up to fou
   - Each **subsequent row** corresponds to one subject in the study.  
   - Each **column** represents a variable to be analyzed.  
   - One of the variables must be a **categorical grouping variable**, which is used to determine each subject’s group membership. *In this case, the variable “Genotipo” in column A serves as the categorical variable.*  
-  ![image](https://github.com/user-attachments/assets/dec0a335-7cd0-432e-861e-5406c4d53b3e)
+  !<img width="1244" height="570" alt="image" src="https://github.com/user-attachments/assets/28aaa133-c468-42b9-9714-a51b6e549c81" />
+
 
 ## Downloading the Repository
 
