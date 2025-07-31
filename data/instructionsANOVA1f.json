@@ -26,11 +26,12 @@
         "graphTitle" : "FUS 18FDG-PET (normWB)",
         "xAxisLabel" : "Brain Regions",
         "yAxisLabel" : "[1/1]",
+        "showDead": "no",
         "Group1" :{
              "fillColor" : "white",
              "lineColor" : "gray",
              "markerShape" : "^",
-             "filledStatus" : "none"
+             "filledStatus" : "filled"
                 },
         "Group2" :{
              "fillColor" : "gray",
@@ -41,8 +42,8 @@
         "Group3" :{
              "fillColor" : "white",
              "lineColor" : "black",
-             "markerShape" : "^",
-             "filledStatus" : "none"
+             "markerShape" : "s",
+             "filledStatus" : "filled"
                 },
         "Group4" :{
              "fillColor" : "color",
