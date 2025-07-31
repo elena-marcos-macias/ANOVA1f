@@ -93,7 +93,7 @@ group = reordercats(group, order); % Order in which groups should appear
 group_categories = categories(group); % After reordering, refresh the group variable
 
 %
-[myColors, myColorsDark] = generateColorMatrices("data/instructionsANOVA1f.json");
+[myColors, myColorsDark, fig] = generateColorMatrices("data/instructionsANOVA1f.json");
 
 % Colors. Use the command `uisetcolor` to explore color values
 %myColors = [...
