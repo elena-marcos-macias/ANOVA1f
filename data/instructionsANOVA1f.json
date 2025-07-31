@@ -45,32 +45,32 @@
              "filledStatus" : "true"
                 },
         "Group4" :{
-             "fillColor" : "A",
-             "lineColor" : "gray",
+             "fillColor" : "color",
+             "lineColor" : "color",
              "markerShape" : "^",
              "filledStatus" : "true"
                 },
         "Group5" :{
-             "fillColor" : "A",
-             "lineColor" : "gray",
+             "fillColor" : "color",
+             "lineColor" : "color",
              "markerShape" : "^",
              "filledStatus" : "true"
                 },
         "Group6" :{
-             "fillColor" : "A",
-             "lineColor" : "gray",
+             "fillColor" : "color",
+             "lineColor" : "color",
              "markerShape" : "^",
              "filledStatus" : "true"
                 },
         "Group7" :{
-             "fillColor" : "A",
-             "lineColor" : "gray",
+             "fillColor" : "color",
+             "lineColor" : "color",
              "markerShape" : "^",
              "filledStatus" : "true"
                 },
         "Group8" :{
-             "fillColor" : "A",
-             "lineColor" : "gray",
+             "fillColor" : "color",
+             "lineColor" : "color",
              "markerShape" : "^",
              "filledStatus" : "true"
                 }       
