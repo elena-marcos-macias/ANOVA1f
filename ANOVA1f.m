@@ -120,34 +120,6 @@ overlayIndividualDataPoints(data, group, group_categories, ...
 % Add asterisks where p < 0.05
 addSignificanceMarkers(p_variance, mean_RegionGroup, sd_RegionGroup, graphBar);
 
-% Add horizontal lines below asterisks where p < 0.05
-for r = 1:nRegions
-    if p_variance(r) < 0.05
-        % X positions for the line ends (first and last group bar)
-        xLeft = graphBar(1).XEndPoints(r);
-        xRight = graphBar(end).XEndPoints(r);
-        % Height (just below the asterisk)
-        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
-        yBar = maxY + 0.11 * maxY;
-        % Draw horizontal line
-        plot([xLeft, xRight], [yBar, yBar], 'k-', 'LineWidth', 1.5);
-    end
-end
-
-% Add horizontal lines xxxxx
-%for r = 1:nRegions
-%    if p_variance(r) < 0.05
-        % X positions for the line ends (first and last group bar)
-%        xLeft = graphBar(1).XEndPoints(r);
-%        xRight = graphBar(end).XEndPoints(r);
-        % Height (just below the asterisk)
-%        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
-%        yBar = maxY + 0.11 * maxY;
-        % Draw horizontal line
-%        plot([xLeft, xRight], [yBar, yBar], 'k-', 'LineWidth', 1.5);
-%    end
-%end
-
 % Labels and title
 title(char(json.graphSpecifications.graphTitle));
 legend(group_categories);
