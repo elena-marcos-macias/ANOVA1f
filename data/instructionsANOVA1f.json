@@ -25,6 +25,55 @@
      "graphSpecifications" : {
         "graphTitle" : "FUS 18FDG-PET (normWB)",
         "xAxisLabel" : "Brain Regions",
-        "yAxisLabel" : "[1/1]"
+        "yAxisLabel" : "[1/1]",
+        "Group1" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                },
+        "Group2" :{
+             "fillColor" : "A",
+             "lineColor" : "B",
+             "markerShape" : "o",
+             "filledStatus" : "false"
+                },
+        "Group3" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                },
+        "Group4" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                },
+        "Group5" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                },
+        "Group6" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                },
+        "Group7" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                },
+        "Group8" :{
+             "fillColor" : "white",
+             "lineColor" : "gray",
+             "markerShape" : "^",
+             "filledStatus" : "true"
+                }       
+        
     }                    
 }
