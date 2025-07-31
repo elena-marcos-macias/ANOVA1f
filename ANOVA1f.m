@@ -116,8 +116,7 @@ end
 % Overlay individual data points
 nSubjects = size(data, 1);
 colors = lines(nGroup);  % Color map by group
-markerShapes = {'^', 'o', '^', 'o'};  % Marker shapes by group
-filledStatus = [false, false, true, true]; % filled or not
+[markerShapes, filledStatus] = generateIndividualMarkers("data/instructionsANOVA1f.json");
 for g = 1:nGroup
     % Extract individual data for group g
     data_gesima = data(group == group_categories{g}, :);

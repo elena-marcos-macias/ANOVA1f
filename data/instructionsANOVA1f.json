@@ -30,49 +30,49 @@
              "fillColor" : "white",
              "lineColor" : "gray",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "filled"
                 },
         "Group2" :{
              "fillColor" : "gray",
              "lineColor" : "black",
              "markerShape" : "o",
-             "filledStatus" : "false"
+             "filledStatus" : "none"
                 },
         "Group3" :{
              "fillColor" : "white",
              "lineColor" : "black",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "filled"
                 },
         "Group4" :{
              "fillColor" : "color",
              "lineColor" : "color",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "none"
                 },
         "Group5" :{
              "fillColor" : "color",
              "lineColor" : "color",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "none"
                 },
         "Group6" :{
              "fillColor" : "color",
              "lineColor" : "color",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "none"
                 },
         "Group7" :{
              "fillColor" : "color",
              "lineColor" : "color",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "none"
                 },
         "Group8" :{
              "fillColor" : "color",
              "lineColor" : "color",
              "markerShape" : "^",
-             "filledStatus" : "true"
+             "filledStatus" : "none"
                 }       
         
     }                    
