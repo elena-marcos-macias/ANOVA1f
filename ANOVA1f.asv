@@ -92,14 +92,14 @@ order = cellstr(string(json.inputDataSelection.groupOrder))';
 group = reordercats(group, order); % Order in which groups should appear
 group_categories = categories(group); % After reordering, refresh the group variable
 
-% Choose the graph's colors (uisetcolors to see the RGB values of the colors)
-[fillColorMatrix, myColorsDark] = generateColorMatrices("data/instructionsANOVA1f.json");
+% Choose the graph's colors 
+[fillColorMatrix, lineColorMatrix] = generateColorMatrices("data/instructionsANOVA1f.json");
 
 % Bar plot
 graphBar = bar(mean_RegionGroup');
 for g = 1:nGroup
     graphBar(g).FaceColor = fillColorMatrix(g,:);
-    graphBar(g).EdgeColor = lineColorm(g,:);
+    graphBar(g).EdgeColor = lineColorMatrix(g,:);
     graphBar(g).BarWidth = 0.85;
     graphBar(g).LineWidth = 1.5;
 end
@@ -116,8 +116,7 @@ end
 % Overlay individual data points
 nSubjects = size(data, 1);
 colors = lines(nGroup);  % Color map by group
-markerShapes = {'^', 'o', '^', 'o'};  % Marker shapes by group
-filledStatus = [false, false, true, true]; % filled or not
+[markerShapes, filledStatus] = generateIndividualMarkers("data/instructionsANOVA1f.json");
 for g = 1:nGroup
     % Extract individual data for group g
     data_gesima = data(group == group_categories{g}, :);
@@ -132,14 +131,14 @@ for g = 1:nGroup
         if filledStatus(g)
             scatter(repmat(xPos, size(yVals)), yVals, 30,...
                 'Marker', marker,...
-                'MarkerEdgeColor', myColorsDark(g,:), ...
-                'MarkerFaceColor', myColorsDark(g,:),...
+                'MarkerEdgeColor', lineColorMatrix(g,:), ...
+                'MarkerFaceColor', lineColorMatrix(g,:),...
                 'LineWidth', 1 , ...
                 'jitter', 'on', 'jitterAmount', 0.10);
         else
             scatter(repmat(xPos, size(yVals)), yVals, 30,...
                 'Marker', marker,...
-                'MarkerEdgeColor', myColorsDark(g,:), ...
+                'MarkerEdgeColor', lineColorMatrix(g,:), ...
                 'MarkerFaceColor', 'none',...
                 'LineWidth', 1 , ...
                 'jitter', 'on', 'jitterAmount', 0.10);

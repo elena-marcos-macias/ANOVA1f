@@ -92,7 +92,7 @@ order = cellstr(string(json.inputDataSelection.groupOrder))';
 group = reordercats(group, order); % Order in which groups should appear
 group_categories = categories(group); % After reordering, refresh the group variable
 
-% Choose the graph's colors (uisetcolors to see the RGB values of the colors)
+% Choose the graph's colors 
 [fillColorMatrix, lineColorMatrix] = generateColorMatrices("data/instructionsANOVA1f.json");
 
 % Bar plot
@@ -114,37 +114,8 @@ for g = 1:nGroup
 end
 
 % Overlay individual data points
-nSubjects = size(data, 1);
-colors = lines(nGroup);  % Color map by group
-[markerShapes, filledStatus] = generateIndividualMarkers("data/instructionsANOVA1f.json");
-for g = 1:nGroup
-    % Extract individual data for group g
-    data_gesima = data(group == group_categories{g}, :);
-    % For each region (column)
-    for r = 1:nRegions
-        % X: the X position of the corresponding bar
-        xPos = graphBar(g).XEndPoints(r);
-        % Y: the individual values
-        yVals = data_gesima(:, r);
-        % Draw points
-        marker = markerShapes{g};
-        if filledStatus(g)
-            scatter(repmat(xPos, size(yVals)), yVals, 30,...
-                'Marker', marker,...
-                'MarkerEdgeColor', lineColorMatrix(g,:), ...
-                'MarkerFaceColor', lineColorMatrix(g,:),...
-                'LineWidth', 1 , ...
-                'jitter', 'on', 'jitterAmount', 0.10);
-        else
-            scatter(repmat(xPos, size(yVals)), yVals, 30,...
-                'Marker', marker,...
-                'MarkerEdgeColor', lineColorMatrix(g,:), ...
-                'MarkerFaceColor', 'none',...
-                'LineWidth', 1 , ...
-                'jitter', 'on', 'jitterAmount', 0.10);
-        end
-    end
-end
+overlayIndividualDataPoints(data, group, group_categories, ...
+    graphBar, nGroup, nRegions, lineColorMatrix, "data/instructionsANOVA1f.json");
 
 % Add asterisks where p < 0.05
 for r = 1:nRegions
