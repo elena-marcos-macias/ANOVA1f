@@ -1,19 +1,14 @@
 function [fillColorMatrix, lineColorMatrix, figHandle] = generateColorMatrices(jsonFilePath)
-%GENERATECOLORMATRICES Extracts color matrices and displays a color legend.
+% GENERATECOLORMATRICES Generates matrices nx3, containing the RGB values for the filling and border colours for a graph.% 
 %
-%   This function reads a JSON file containing color specifications for different
-%   graph groups. It maps color names to their corresponding RGB values, extracts
-%   the fill and line color values for each predefined group, and returns them as
-%   matrices. Additionally, it generates and displays a figure that visually shows
-%   all defined colors with their associated names.
+% INPUTS:
+%   - jsonFilePath: numerical array (nSubjects x nRegions; Subjects in rows and Regions in columns; Subjects must be grouped by some categorical variable)
+%   - Group: group vector (categorical variable)
+%   - Group_categories: cell with the individual name for each group
 %
-%   INPUT:
-%       jsonFilePath       - Path to the JSON file containing color definitions.
-%
-%   OUTPUT:
-%       fillColorMatrix    - Matrix (Nx3) of RGB values for group fill colors.
-%       lineColorMatrix    - Matrix (Nx3) of RGB values for group line colors.
-%       figHandle          - Handle to the generated figure with color legend.
+% OUTPUT:
+%   ANOVA_friendly      - logical array that idicates if the assumptions of the ANOVA (normality and homogeneity) are true for each region.
+% 
 
 
     % Read the JSON file
