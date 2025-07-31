@@ -118,23 +118,7 @@ overlayIndividualDataPoints(data, group, group_categories, ...
     graphBar, nGroup, nRegions, lineColorMatrix, "data/instructionsANOVA1f.json");
 
 % Add asterisks where p < 0.05
-for r = 1:nRegions
-    if p_variance(r) < 0.01
-        % Get max bar height in region r
-        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
-        % Centered X position for the asterisk
-        xPos = mean(arrayfun(@(g) graphBar(g).XEndPoints(r), 1:nGroup));
-        % Add asterisk
-        text(xPos, maxY + 0.13 * maxY, '**', 'FontSize', 30, 'HorizontalAlignment', 'center', 'Color', 'k');
-    elseif p_variance(r) < 0.05
-        % Get max bar height in region r
-        maxY = max(mean_RegionGroup(:, r) + sd_RegionGroup(:, r));
-        % Centered X position for the asterisk
-        xPos = mean(arrayfun(@(g) graphBar(g).XEndPoints(r), 1:nGroup));
-        % Add asterisk
-        text(xPos, maxY + 0.13 * maxY, '*', 'FontSize', 30, 'HorizontalAlignment', 'center', 'Color', 'k');
-    end
-end
+addSignificanceMarkers(p_variance, mean_RegionGroup, sd_RegionGroup, graphBar);
 
 % Add horizontal lines below asterisks where p < 0.05
 for r = 1:nRegions
