@@ -114,8 +114,15 @@ for g = 1:nGroup
 end
 
 % Overlay individual data points
-overlayIndividualDataPoints(data, group, group_categories, ...
-    graphBar, nGroup, nRegions, lineColorMatrix, "data/instructionsANOVA1f.json");
+%overlayIndividualDataPoints(data, group, group_categories, ...
+%    graphBar, nGroup, nRegions, lineColorMatrix, "data/instructionsANOVA1f.json");
+
+%DEATH POINTS
+deathVector = strcmpi(T_Original.Muerte, 'si');  
+overlayIndividualDeathPoints(data, group, group_categories, ...
+                                     graphBar, nGroup, nRegions, ...
+                                     lineColorMatrix, "data/instructionsANOVA1f.json", deathVector);
+
 
 % Add asterisks where p < 0.05
 addSignificanceMarkers(p_variance, mean_RegionGroup, sd_RegionGroup, graphBar);
