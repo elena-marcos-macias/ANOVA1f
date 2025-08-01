@@ -66,23 +66,22 @@ Follow these steps to modify the JSON file appropriately:
   -  `"groupName"`: Name of the grouping variable. This must match the column header in the Excel file.  
    *In the example data, this would be column A, labeled "Genotipo".*
 
-  -  `"groupOrder"`: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not. (I want to change it so that you can select some categories and not necessarily all of them)**
+  -  `"groupOrder"`: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not.** ~ LO QUIERO CAMBIAR PARA QUE PUEDAS SELECCIONAR CATEGORÍAS Y NO TENENGAS QUE USAR TODAS~
    *Example: `["WT", "Het", "Hom"]`.*
 
-7. **"groupControl"**: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
+  -  `"groupControl"`: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
 
-8. **"descriptiveStatistics"**: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
+3  **"outputFileNames"**:
+
+  -  `"descriptiveStatistics"`: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
    The output includes group sample sizes, means, and standard deviations.
+  -  `"varianceAnalysis"`: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
+  -  `"posthoc_AllComparisons"`: File name (including `.xlsx` extension) for the output Excel file containing results from Tukey’s post-hoc test (and non-parametric alternative). Includes p-values and significance indicators.
+  -  `"posthoc_vsControl1"`: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative). Includes p-values and significance indicators.
+  -  `"posthoc_vsControl2"`: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative). Includes p-values and significance indicators.
+  -  `"graphBar"`: File name (with `.fig` extension) for the MATLAB figure output.
 
-9. **"varianceAnalysis"**: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
-
-10. **"posthoc_AllComparisons"**: File name (including `.xlsx` extension) for the output Excel file containing results from Tukey’s post-hoc test (and non-parametric alternative). Includes p-values and significance indicators.
-
-11. **"posthoc_vsControl1"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative). Includes p-values and significance indicators.
-
-12. **"posthoc_vsControl2"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative). Includes p-values and significance indicators.
-
-13. **"graphBar"**: File name (with `.fig` extension) for the MATLAB figure output.  
+ 4  **"graphSpecifications":**
     - `"graphTitle"`: title of the graph.  
     - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
     - `"showDead"`: LO HE CAMBIADO POR HIGHLIGHTVARIABLE para que no dependiense del nombre del excel. Pero claro ahora hay que terminar de actualizar el README. Tb me gustaría hacer opcional que aparezca el gráfico ¿if?
