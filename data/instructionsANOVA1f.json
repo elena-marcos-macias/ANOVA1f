@@ -15,6 +15,7 @@
                         }
      },
     "outputFileNames" : {
+        "excelFileName" : "FUS_test6_results.xlsx",
         "descriptiveStatistics" : "DescriptiveStatistics",
         "varianceAnalysis" : "VarianceAnalysis",
         "posthoc_AllComparisons" : "Posthoc_AllComparisons",
