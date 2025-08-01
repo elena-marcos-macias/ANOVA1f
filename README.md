@@ -84,10 +84,17 @@ Follow these steps to modify the JSON file appropriately:
  4  **"graphSpecifications":**
   - `"graphTitle"`: title of the graph.  
   - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
-  - `"showDead"`: LO HE CAMBIADO POR HIGHLIGHTVARIABLE para que no dependiense del nombre del excel. Pero claro ahora hay que terminar de actualizar el README. Tb me gustaría hacer opcional que aparezca el gráfico ¿if?
+  - "highlightVariable":
+      - `"showHighlightVariable"`: YES or NO, depending on wheather or not you want to mark differently the individual points for those subjects for which the `"highlightVariable"`is true.
+      - `"highlightVariable"`: name of said variable on the input excel archive (*e.g. in column B "Death" would be the highlight variable*).
+      - `"trueHighlightVariable"`: string that, in the input excel file, represents those subjects for which the highlight variable is true (*e.g. in column B "yes" marks those subjects for which "Death" is true*).
+  - "GroupN":
+
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
 Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
+
+~Tb me gustaría hacer opcional que aparezca el gráfico ¿if?~
 
 ## Running the Script
 
