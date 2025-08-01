@@ -120,7 +120,7 @@ addSignificanceMarkers(p_variance, mean_RegionGroup, sd_RegionGroup, graphBar);
 % Overlay individual data points with or without death markers
 if char(json.graphSpecifications.showHighlightVariable) == "yes"
     highlightVariable = char(json.graphSpecifications.highlightVariable);
-    deathVector = strcmpi(T_Original.(highlightVariable), 'si');  
+    deathVector = strcmpi(T_Original.(highlightVariable), 'yes');  
     overlayIndividualDeathPoints(data, group, group_categories, ...
                                      graphBar, nGroup, nRegions, ...
                                      lineColorMatrix, "data/instructionsANOVA1f.json", deathVector);

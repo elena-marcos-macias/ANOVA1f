@@ -5,7 +5,7 @@
                             "target_columns" : [4,22],
                             "ignore_columns" : [1,3]
                         },
-        "groupName" : "Genotipo",
+        "groupName" : "Genotype",
         "groupOrder" : ["WT",
                         "Het",
                         "Hom"],
@@ -27,7 +27,7 @@
         "xAxisLabel" : "Brain Regions",
         "yAxisLabel" : "[1/1]",
         "showHighlightVariable": "yes",
-        "highlightVariable": "Muerte",
+        "highlightVariable": "Death",
         "Group1" :{
              "fillColor" : "white",
              "lineColor" : "gray",
