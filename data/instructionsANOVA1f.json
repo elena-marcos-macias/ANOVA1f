@@ -26,8 +26,12 @@
         "graphTitle" : "FUS 18FDG-PET (normWB)",
         "xAxisLabel" : "Brain Regions",
         "yAxisLabel" : "[1/1]",
-        "showHighlightVariable": "yes",
-        "highlightVariable": "Death",
+        "highlightVariable": {
+            "showHighlightVariable": "yes",
+            "highlightVariable": "Death",
+            "trueHighlightVariable": "yes"
+        },
+        
         "Group1" :{
              "fillColor" : "white",
              "lineColor" : "gray",
