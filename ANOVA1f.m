@@ -17,7 +17,7 @@
 
 
 %--------- Add function path and set save path ----------
-addpath ('./utils');
+addpath (genpath('./utils'));
 addpath ('./requirements');
 savePath = './results/';
 
