@@ -46,6 +46,9 @@ groupName = char(json.inputDataSelection.groupName);
 % -------- Prepare numeric data (array format) for analysis ---------
 data = table2array(T_Data);
 
+%% TRIAL Excel
+
+fileName = [savePath 'myResults.xlsx'];
 
 %% DESCRIPTIVE ANALYSIS
 
@@ -56,7 +59,7 @@ group_categories = categories(group); % After reordering, refresh the group vari
 % --------- Mean and standard deviation -----------------
 [T_descriptives, mean_RegionGroup, sd_RegionGroup] = compute_descriptives(data, group, group_categories, regions_unique, nRegions, nGroup);
 % Save results as .xlsx
-writetable(T_descriptives, [savePath char(json.outputFileNames.descriptiveStatistics)]);
+writetable(T_descriptives, fileName, 'Sheet', [char(json.outputFileNames.descriptiveStatistics)]);
 
 
 %% VARIANCE ANALYSIS - ANOVA 1F
@@ -71,20 +74,20 @@ ANOVA_friendly = checkANOVA1f(data, group, group_categories);
 %------------- Analysis of variance (ANOVA or KRUSKAL-WALLIS)---------------
 [T_VarianceAnalysis, p_variance] = variance1f_analysis(data, group, ANOVA_friendly, regions_unique);
 % Save results as .xlsx
-writetable(T_VarianceAnalysis, [savePath char(json.outputFileNames.varianceAnalysis)]);
+writetable(T_VarianceAnalysis, fileName, 'Sheet', [char(json.outputFileNames.varianceAnalysis)]);
 
 % ------------- Post-hoc - All comparisons (Tukey or Dunn-Bonferroni) -------
 T_posthoc_AllComparisons = posthoc1f_allcomparisons(data, group, group_categories, ANOVA_friendly, regions_unique);
 % Save results as .xlsx
-writetable(T_posthoc_AllComparisons, [savePath char(json.outputFileNames.posthoc_AllComparisons)]);
+writetable(T_posthoc_AllComparisons, fileName, 'Sheet', [char(json.outputFileNames.posthoc_AllComparisons)]);
 
 % ------------- Post-hoc - Comparisons against control (Dunnett or Dunn-Bonferroni vs. control) -------
 controlGroup1 = char(json.inputDataSelection.groupControl.controlGroup1);
 controlGroup2 = char(json.inputDataSelection.groupControl.controlGroup2);
 [T_posthoc_vsControl1, T_posthoc_vsControl2] = posthoc1f_againstcontrol(data, group, regions_unique, ANOVA_friendly, nRegions, nGroup, controlGroup1, controlGroup2);
 % Save results as .xlsx
-writetable(T_posthoc_vsControl1,[savePath char(json.outputFileNames.posthoc_vsControl1)]);
-writetable(T_posthoc_vsControl2,[savePath char(json.outputFileNames.posthoc_vsControl2)]);
+writetable(T_posthoc_vsControl1, fileName, 'Sheet', [char(json.outputFileNames.posthoc_vsControl1)]);
+writetable(T_posthoc_vsControl2, fileName, 'Sheet', [char(json.outputFileNames.posthoc_vsControl2)]);
 
 
 %% --------------------- PLOT ----------------------------------

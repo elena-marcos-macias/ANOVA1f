@@ -15,11 +15,11 @@
                         }
      },
     "outputFileNames" : {
-        "descriptiveStatistics" : "DescriptiveStatistics.xlsx",
-        "varianceAnalysis" : "VarianceAnalysis.xlsx",
-        "posthoc_AllComparisons" : "Posthoc_AllComparisons.xlsx",
-        "posthoc_vsControl1" : "Posthoc_vsControl1.xlsx",
-        "posthoc_vsControl2" : "Posthoc_vsControl2.xlsx",
+        "descriptiveStatistics" : "DescriptiveStatistics",
+        "varianceAnalysis" : "VarianceAnalysis",
+        "posthoc_AllComparisons" : "Posthoc_AllComparisons",
+        "posthoc_vsControl1" : "Posthoc_vsControl1",
+        "posthoc_vsControl2" : "Posthoc_vsControl2",
         "graphBar" : "Graph_MeanSDANOVA.fig"
     },
      "graphSpecifications" : {
@@ -31,7 +31,6 @@
             "highlightVariable": "Death",
             "trueHighlightVariable": "yes"
         },
-        
         "Group1" :{
              "fillColor" : "white",
              "lineColor" : "gray",

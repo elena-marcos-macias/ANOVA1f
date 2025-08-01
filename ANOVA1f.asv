@@ -46,6 +46,9 @@ groupName = char(json.inputDataSelection.groupName);
 % -------- Prepare numeric data (array format) for analysis ---------
 data = table2array(T_Data);
 
+%% TRIAL Excel
+
+fileName = 'myResults.xlsx'
 
 %% DESCRIPTIVE ANALYSIS
 
@@ -56,7 +59,7 @@ group_categories = categories(group); % After reordering, refresh the group vari
 % --------- Mean and standard deviation -----------------
 [T_descriptives, mean_RegionGroup, sd_RegionGroup] = compute_descriptives(data, group, group_categories, regions_unique, nRegions, nGroup);
 % Save results as .xlsx
-writetable(T_descriptives, [savePath char(json.outputFileNames.descriptiveStatistics)]);
+%writetable(T_descriptives, [savePath char(json.outputFileNames.descriptiveStatistics)]);
 
 
 %% VARIANCE ANALYSIS - ANOVA 1F
@@ -120,7 +123,7 @@ addSignificanceMarkers(p_variance, mean_RegionGroup, sd_RegionGroup, graphBar);
 % Overlay individual data points with or without death markers
 if char(json.graphSpecifications.highlightVariable.showHighlightVariable) == "yes"
     highlightVariable = char(json.graphSpecifications.highlightVariable.highlightVariable);
-    deathVector = strcmpi(T_Original.(highlightVariable), 'yes');  
+    deathVector = strcmpi(T_Original.(highlightVariable), char(json.graphSpecifications.highlightVariable.trueHighlightVariable));  
     overlayIndividualDeathPoints(data, group, group_categories, ...
                                      graphBar, nGroup, nRegions, ...
                                      lineColorMatrix, "data/instructionsANOVA1f.json", deathVector);
