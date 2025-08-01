@@ -65,14 +65,11 @@ Follow these steps to modify the JSON file appropriately:
           *Example: to ignore columns A–C and J–M, write `[1,3,10,13]`.*
   -  `"groupName"`: Name of the grouping variable. This must match the column header in the Excel file.  
    *In the example data, this would be column A, labeled "Genotipo".*
-
-  -  `"groupOrder"`: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not.** ~ LO QUIERO CAMBIAR PARA QUE PUEDAS SELECCIONAR CATEGORÍAS Y NO TENENGAS QUE USAR TODAS~
+  -  `"groupOrder"`: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not.** ~LO QUIERO CAMBIAR PARA QUE PUEDAS SELECCIONAR CATEGORÍAS Y NO TENENGAS QUE USAR TODAS~
    *Example: `["WT", "Het", "Hom"]`.*
-
   -  `"groupControl"`: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
 
 3  **"outputFileNames"**:
-
   -  `"descriptiveStatistics"`: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
    The output includes group sample sizes, means, and standard deviations.
   -  `"varianceAnalysis"`: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
@@ -88,7 +85,8 @@ Follow these steps to modify the JSON file appropriately:
       - `"showHighlightVariable"`: YES or NO, depending on wheather or not you want to mark differently the individual points for those subjects for which the `"highlightVariable"`is true.
       - `"highlightVariable"`: name of said variable on the input excel archive (*e.g. in column B "Death" would be the highlight variable*).
       - `"trueHighlightVariable"`: string that, in the input excel file, represents those subjects for which the highlight variable is true (*e.g. in column B "yes" marks those subjects for which "Death" is true*).
-  - "GroupN":
+  - "GroupN": next there are a series of paragraphs named Group and a number. The number indicates the order in which the groups are going to be represented in the graph. In other words, if we've stablished the `"groupOrder"` as `["WT", "Het", "Hom"]`, "WT" is going to be represented with the characteristics specified in '"Group1"`, "Het" with '"Group2"` and "Hom" with '"Group3"`.
+  Don't worry if you don't have enough experimental groups to complete the eight posible groups of the .json archive. Simply leave the extra ones as they are.
 
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
