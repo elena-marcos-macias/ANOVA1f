@@ -86,7 +86,8 @@ Follow these steps to modify the JSON file appropriately:
       - `"highlightVariable"`: name of said variable on the input excel archive (*e.g. in column B "Death" would be the highlight variable*).
       - `"trueHighlightVariable"`: string that, in the input excel file, represents those subjects for which the highlight variable is true (*e.g. in column B "yes" marks those subjects for which "Death" is true*).
   - "GroupN": next there are a series of paragraphs named Group and a number. The number indicates the order in which the groups are going to be represented in the graph. In other words, if we've stablished the `"groupOrder"` as `["WT", "Het", "Hom"]`, "WT" is going to be represented with the characteristics specified in `"Group1"`, "Het" with `"Group2"` and "Hom" with `"Group3"`.
-Don't worry if you don't have enough experimental groups to complete the eight posible groups of the .json archive. Simply leave the extra ones as they are.
+    Don't worry if you don't have enough experimental groups to complete the eight posible groups of the .json archive. Simply leave the extra ones as they are.
+      - `"fillColor"` and `"lineColor"`: string that corresponds to a color from this color palete.
 
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
