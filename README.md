@@ -79,9 +79,8 @@ Follow these steps to modify the JSON file appropriately:
   -  `"graphBar"`: File name (with `.fig` extension) for the MATLAB figure output.
 
  4 **`"wantGraph"`**: complete with yes or no, depending on wheather or not you want to generate a graph with the mean and standar deviation results. The graph also includes the individual points for each subject and significance markers (ANOVA results). Here is an example of said graph.
-
  
-     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
+ ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
  
  5 **"graphSpecifications":**
   - `"graphTitle"`: title of the graph.  
