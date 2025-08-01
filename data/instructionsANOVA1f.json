@@ -23,7 +23,8 @@
         "posthoc_vsControl2" : "Posthoc_vsControl2",
         "graphBar" : "Graph_MeanSDANOVA.fig"
     },
-     "graphSpecifications" : {
+    "wantGraph": "no", 
+    "graphSpecifications" : {
         "graphTitle" : "FUS 18FDG-PET (normWB)",
         "xAxisLabel" : "Brain Regions",
         "yAxisLabel" : "[1/1]",

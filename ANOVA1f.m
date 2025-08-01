@@ -90,12 +90,16 @@ writetable(T_posthoc_vsControl2, resultsFileName, 'Sheet', [char(json.outputFile
 
 
 %% --------------------- PLOT ----------------------------------
-jsonFilePath = "data/instructionsANOVA1f.json";
-json = readstruct(jsonFilePath);
+if strcmpi(char(json.wantGraph), 'yes')
+    jsonFilePath = "data/instructionsANOVA1f.json";
+    json = readstruct(jsonFilePath);
+    
+    graphBar = plotBarWithStats(json, jsonFilePath, T_Original, T_Data, data, ...
+                                group, mean_RegionGroup, sd_RegionGroup, ...
+                                p_variance, nGroup, nRegions, savePath);
 
-graphBar = plotBarWithStats(json, jsonFilePath, T_Original, T_Data, data, ...
-                            group, mean_RegionGroup, sd_RegionGroup, ...
-                            p_variance, nGroup, nRegions, savePath);
+    % Save results as .fig
+    savefig(fullfile(savePath, json.outputFileNames.graphBar));
+else
+end
 
-% Save results as .fig
-savefig(fullfile(savePath, json.outputFileNames.graphBar));
