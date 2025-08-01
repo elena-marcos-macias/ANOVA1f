@@ -86,16 +86,19 @@ Follow these steps to modify the JSON file appropriately:
       - `"highlightVariable"`: name of said variable on the input excel archive (*e.g. in column B "Death" would be the highlight variable*).
       - `"trueHighlightVariable"`: string that, in the input excel file, represents those subjects for which the highlight variable is true (*e.g. in column B "yes" marks those subjects for which "Death" is true*).
   - "GroupN": next there are a series of paragraphs named Group and a number. The number indicates the order in which the groups are going to be represented in the graph. In other words, if we've stablished the `"groupOrder"` as `["WT", "Het", "Hom"]`, "WT" is going to be represented with the characteristics specified in `"Group1"`, "Het" with `"Group2"` and "Hom" with `"Group3"`.
+
     Don't worry if you don't have enough experimental groups to complete the eight posible groups of the .json archive. Simply leave the extra ones as they are.
       - `"fillColor"` and `"lineColor"`: string that corresponds to a color from this color palete.
         <img width="1546" height="644" alt="image" src="https://github.com/user-attachments/assets/b38c6f86-f3ba-4eee-97ba-8272407b30db" />
       - `"markerShape"`: complete with "^" to use triangles, "o" to use cicles and "s" for squares.
       - `"filledStatus"`: complete with "filled" if you want the shapes to be coloured in and "none" if not.
 
+Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
 
+
+This is an example image of the resulting graph:
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
-Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
 
 ~Tb me gustaría hacer opcional que aparezca el gráfico ¿if?~
 
