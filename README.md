@@ -11,7 +11,7 @@ This code is designed to perform a one-way between-subjects ANOVA with up to fou
   - Each **subsequent row** corresponds to one subject in the study.  
   - Each **column** represents a variable to be analyzed.  
   - One of the variables must be a **categorical grouping variable**, which is used to determine each subject’s group membership. *In this case, the variable “Genotipo” in column A serves as the categorical variable.*
-  - One of the variables can be another, **bimodal, categorical variable** which allow us to highlight certain subjects. *In column B, the variable "Muerte" indicates which animals died spontaneously during the experiment.* VOY A SACAR EL VALOR TRUE DE LA FUNCIÓN Y PONERLO EN EL JSON PARA QUE SEA MODIFICABLE!!!
+  - One of the variables can be another, **bimodal, categorical variable** which allow us to highlight certain subjects. *In column B, the variable "Muerte" indicates which animals died spontaneously during the experiment.*
   <img width="1172" height="569" alt="image" src="https://github.com/user-attachments/assets/97c14b2b-31b2-40e8-8f6a-3f5f7235fd98" />
 
 
@@ -39,7 +39,7 @@ Open the `data` folder and copy your Excel data file into it.
 
 Within the `data` folder, open the file `instructionsANOVA1f.json`. If you do not have a code editor (such as Visual Studio Code), you may use Notepad. You will see a structure similar to this:
 
-<img width="945" height="915" alt="image" src="https://github.com/user-attachments/assets/8d2cc5fe-96ff-4062-acb7-0bdd828cb351" />
+<img width="865" height="914" alt="image" src="https://github.com/user-attachments/assets/e6d78cb6-8338-4f21-b413-c1011ac26f35" />
 
 
 Follow these steps to modify the JSON file appropriately:
