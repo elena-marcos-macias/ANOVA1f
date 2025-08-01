@@ -90,57 +90,12 @@ writetable(T_posthoc_vsControl2, resultsFileName, 'Sheet', [char(json.outputFile
 
 
 %% --------------------- PLOT ----------------------------------
-order = cellstr(string(json.inputDataSelection.groupOrder))';
-group = reordercats(group, order); % Order in which groups should appear
-group_categories = categories(group); % After reordering, refresh the group variable
+jsonFilePath = "data/instructionsANOVA1f.json";
+json = readstruct(jsonFilePath);
 
-% Choose the graph's colors 
-[fillColorMatrix, lineColorMatrix] = generateColorMatrices("data/instructionsANOVA1f.json");
-
-% Bar plot
-graphBar = bar(mean_RegionGroup');
-for g = 1:nGroup
-    graphBar(g).FaceColor = fillColorMatrix(g,:);
-    graphBar(g).EdgeColor = lineColorMatrix(g,:);
-    graphBar(g).BarWidth = 0.85;
-    graphBar(g).LineWidth = 1.5;
-end
-
-% Error bars
-hold on
-for g = 1:nGroup
-    x = graphBar(g).XEndPoints;
-    y = graphBar(g).YData;
-    e = sd_RegionGroup(g,:);
-    errorbar(x, y, e, 'k.', 'LineWidth', 1);
-end
-
-% Add asterisks where p < 0.05
-addSignificanceMarkers(p_variance, mean_RegionGroup, sd_RegionGroup, graphBar);
-
-
-% Overlay individual data points with or without death markers
-if char(json.graphSpecifications.highlightVariable.showHighlightVariable) == "yes"
-    highlightVariable = char(json.graphSpecifications.highlightVariable.highlightVariable);
-    deathVector = strcmpi(T_Original.(highlightVariable), char(json.graphSpecifications.highlightVariable.trueHighlightVariable));  
-    overlayIndividualDeathPoints(data, group, group_categories, ...
-                                     graphBar, nGroup, nRegions, ...
-                                     lineColorMatrix, "data/instructionsANOVA1f.json", deathVector);
-else
-    overlayIndividualDataPoints(data, group, group_categories, ...
-                                     graphBar, nGroup, nRegions, ...
-                                     lineColorMatrix, "data/instructionsANOVA1f.json");
-end
-
-
-% Labels and title
-title(char(json.graphSpecifications.graphTitle));
-legend(group_categories);
-xticklabels(T_Data.Properties.VariableNames);
-xticks(1:nRegions);
-xlabel(char(json.graphSpecifications.xAxisLabel));
-ylabel(char(json.graphSpecifications.yAxisLabel));
-hold off
+graphBar = plotBarWithStats(json, jsonFilePath, T_Original, T_Data, data, ...
+                            group, mean_RegionGroup, sd_RegionGroup, ...
+                            p_variance, nGroup, nRegions, savePath);
 
 % Save results as .fig
 savefig(fullfile(savePath, json.outputFileNames.graphBar));
