@@ -55,8 +55,8 @@ Follow these steps to modify the JSON file appropriately:
       -  `"fileName"`: The name of the Excel file you copied into the `data` folder. It must match               exactly, including the `.xlsx` extension. It is recommended to copy and paste the file name            rather than typing it manually.
       -  `"columnCriteria"`: Criteria for distinguishing columns that contain data that is going to be           used to mathematically operate from those that do not (e.g., grouping variable or subject ID           columns).
              - `"target_columns"`: Specifies the columns to be analyzed. Two methods are available:
-               - **Text**: A shared keyword present in all column names to be included (case-                            sensitive).  
-                 *Example: if columns are named Mean_1, Mean_2, ..., use `"Mean"`.*
+                        - **Text**: A shared keyword present in all column names to be included (case-                            sensitive).
+                           *Example: if columns are named Mean_1, Mean_2, ..., use `"Mean"`.*
                - **Numeric**: Specify the column ranges using pairs of numbers (start and end column                     indices).  
                  *Example: to include columns D–I and N–V, write `[4,9,14,22]`.*
              - `"ignore_columns"`: Specifies the columns to exclude from analysis. Two options:
