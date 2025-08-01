@@ -78,7 +78,10 @@ Follow these steps to modify the JSON file appropriately:
   -  `"posthoc_vsControl2"`: name of the Sheet containing the results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative), in the results' Excel file. Includes p-values and significance indicators.
   -  `"graphBar"`: File name (with `.fig` extension) for the MATLAB figure output.
 
- 4  **"graphSpecifications":**
+ 4 **`"wantGraph"`**: complete with yes or no, depending on wheather or not you want to generate a graph with the mean and standar deviation results. The graph also includes the individual points for each subject and significance markers (ANOVA results). Here is an example of said graph.
+ ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
+ 
+ 5 **"graphSpecifications":**
   - `"graphTitle"`: title of the graph.  
   - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
   - "highlightVariable":
@@ -94,11 +97,6 @@ Follow these steps to modify the JSON file appropriately:
       - `"filledStatus"`: complete with "filled" if you want the shapes to be coloured in and "none" if not.
 
 Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
-
-
-This is an example image of the resulting graph:
-    ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
-
 
 ~Tb me gustaría hacer opcional que aparezca el gráfico ¿if?~
 
