@@ -82,9 +82,9 @@ Follow these steps to modify the JSON file appropriately:
   -  `"graphBar"`: File name (with `.fig` extension) for the MATLAB figure output.
 
  4  **"graphSpecifications":**
-    - `"graphTitle"`: title of the graph.  
-    - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
-    - `"showDead"`: LO HE CAMBIADO POR HIGHLIGHTVARIABLE para que no dependiense del nombre del excel. Pero claro ahora hay que terminar de actualizar el README. Tb me gustaría hacer opcional que aparezca el gráfico ¿if?
+  - `"graphTitle"`: title of the graph.  
+  - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
+  - `"showDead"`: LO HE CAMBIADO POR HIGHLIGHTVARIABLE para que no dependiense del nombre del excel. Pero claro ahora hay que terminar de actualizar el README. Tb me gustaría hacer opcional que aparezca el gráfico ¿if?
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
 Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
