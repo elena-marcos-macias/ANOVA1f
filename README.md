@@ -82,13 +82,15 @@ Follow these steps to modify the JSON file appropriately:
   - `"graphTitle"`: title of the graph.  
   - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
   - "highlightVariable":
-      - `"showHighlightVariable"`: YES or NO, depending on wheather or not you want to mark differently the individual points for those subjects for which the `"highlightVariable"`is true.
+      - `"showHighlightVariable"`: complete with yes or no, depending on wheather or not you want to mark differently the individual points for those subjects for which the `"highlightVariable"`is true. If you write "yes" these point will be coloured in red. For the time being you can't choose the color.
       - `"highlightVariable"`: name of said variable on the input excel archive (*e.g. in column B "Death" would be the highlight variable*).
       - `"trueHighlightVariable"`: string that, in the input excel file, represents those subjects for which the highlight variable is true (*e.g. in column B "yes" marks those subjects for which "Death" is true*).
   - "GroupN": next there are a series of paragraphs named Group and a number. The number indicates the order in which the groups are going to be represented in the graph. In other words, if we've stablished the `"groupOrder"` as `["WT", "Het", "Hom"]`, "WT" is going to be represented with the characteristics specified in `"Group1"`, "Het" with `"Group2"` and "Hom" with `"Group3"`.
     Don't worry if you don't have enough experimental groups to complete the eight posible groups of the .json archive. Simply leave the extra ones as they are.
       - `"fillColor"` and `"lineColor"`: string that corresponds to a color from this color palete.
-      - <img width="1546" height="644" alt="image" src="https://github.com/user-attachments/assets/b38c6f86-f3ba-4eee-97ba-8272407b30db" />
+        <img width="1546" height="644" alt="image" src="https://github.com/user-attachments/assets/b38c6f86-f3ba-4eee-97ba-8272407b30db" />
+      - `"markerShape"`: complete with "^" to use triangles, "o" to use cicles and "s" for squares.
+      - `"filledStatus"`: complete with "filled" if you want the shapes to be coloured in and "none" if not.
 
 
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
