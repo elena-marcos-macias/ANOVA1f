@@ -70,12 +70,12 @@ Follow these steps to modify the JSON file appropriately:
   -  `"groupControl"`: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
 
 3  **"outputFileNames"**:
-  -  `"descriptiveStatistics"`: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
-   The output includes group sample sizes, means, and standard deviations.
-  -  `"varianceAnalysis"`: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
-  -  `"posthoc_AllComparisons"`: File name (including `.xlsx` extension) for the output Excel file containing results from Tukey’s post-hoc test (and non-parametric alternative). Includes p-values and significance indicators.
-  -  `"posthoc_vsControl1"`: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative). Includes p-values and significance indicators.
-  -  `"posthoc_vsControl2"`: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative). Includes p-values and significance indicators.
+  - `"excelFileName"`: File name (including `.xlsx` extension) for the Excel file containing the results from the analysis.  
+  -  `"descriptiveStatistics"`: name of the Sheet containing the descriptive statistics, in the results' Excel file. The output includes group sample sizes, means, and standard deviations.
+  -  `"varianceAnalysis"`: name of the Sheet containing the ANOVA (or non-parametric equivalent) results, in the results' Excel file.  Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
+  -  `"posthoc_AllComparisons"`: name of the Sheet containing the results from Tukey’s post-hoc test (and non-parametric alternative), in the results' Excel file. Includes p-values and significance indicators.
+  -  `"posthoc_vsControl1"`: name of the Sheet containing the results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative), in the results' Excel file. Includes p-values and significance indicators.
+  -  `"posthoc_vsControl2"`: name of the Sheet containing the results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative), in the results' Excel file. Includes p-values and significance indicators.
   -  `"graphBar"`: File name (with `.fig` extension) for the MATLAB figure output.
 
  4  **"graphSpecifications":**
