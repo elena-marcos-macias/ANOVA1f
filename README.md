@@ -51,44 +51,42 @@ Follow these steps to modify the JSON file appropriately:
    - The elements are organized in blocks enclosed in curly braces `{}` or square brackets `[]`—**do not alter** this structure.
    - Elements within the same block must be separated by commas `,`, **except the last one**.
 
-2. **"fileName"**: The name of the Excel file you copied into the `data` folder. It must match exactly, including the `.xlsx` extension. It is recommended to copy and paste the file name rather than typing it manually.
+2.  **"inputDataSelection"**
+      -  `"fileName"`: The name of the Excel file you copied into the `data` folder. It must match               exactly, including the `.xlsx` extension. It is recommended to copy and paste the file name            rather than typing it manually.
+      -  `"columnCriteria"`: Criteria for distinguishing columns that contain data that is going to be           used to mathematically operate from those that do not (e.g., grouping variable or subject ID           columns).
+             - `"target_columns"`: Specifies the columns to be analyzed. Two methods are available:
+               - **Text**: A shared keyword present in all column names to be included (case-                            sensitive).  
+                 *Example: if columns are named Mean_1, Mean_2, ..., use `"Mean"`.*
+               - **Numeric**: Specify the column ranges using pairs of numbers (start and end column                     indices).  
+                 *Example: to include columns D–I and N–V, write `[4,9,14,22]`.*
+             - `"ignore_columns"`: Specifies the columns to exclude from analysis. Two options:
+               - **Text**: If using the text method above for target columns, enter `"None"`.
+               - **Numeric**: Specify the ranges of columns to be ignored using pairs of indices.  
+                 *Example: to ignore columns A–C and J–M, write `[1,3,10,13]`.*
 
-3. **"columnCriteria"**: Criteria for distinguishing columns that contain data that is going to be used to mathematically operate from those that do not (e.g., grouping variable or subject ID columns).
-
-   - **"target_columns"**: Specifies the columns to be analyzed. Two methods are available:
-     - **Text**: A shared keyword present in all column names to be included (case-sensitive).  
-       *Example: if columns are named Mean_1, Mean_2, ..., use `"Mean"`.*
-     - **Numeric**: Specify the column ranges using pairs of numbers (start and end column indices).  
-       *Example: to include columns D–I and N–V, write `[4,9,14,22]`.*
-
-   - **"ignore_columns"**: Specifies the columns to exclude from analysis. Two options:
-     - **Text**: If using the text method above for target columns, enter `"None"`.
-     - **Numeric**: Specify the ranges of columns to be ignored using pairs of indices.  
-       *Example: to ignore columns A–C and J–M, write `[1,3,10,13]`.*
-
-4. **"groupName"**: Name of the grouping variable. This must match the column header in the Excel file.  
+5. **"groupName"**: Name of the grouping variable. This must match the column header in the Excel file.  
    *In the example data, this would be column A, labeled "Genotipo".*
 
-5. **"groupOrder"**: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not. (I want to change it so that you can select some categories and not necessarily all of them)**
+6. **"groupOrder"**: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not. (I want to change it so that you can select some categories and not necessarily all of them)**
    *Example: `["WT", "Het", "Hom"]`.*
 
-6. **"groupControl"**: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
+7. **"groupControl"**: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
 
-7. **"descriptiveStatistics"**: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
+8. **"descriptiveStatistics"**: File name (including `.xlsx` extension) for the Excel file containing descriptive statistics.  
    The output includes group sample sizes, means, and standard deviations.
 
-8. **"varianceAnalysis"**: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
+9. **"varianceAnalysis"**: File name (including `.xlsx` extension) for the output Excel file containing ANOVA (or non-parametric equivalent) results. Includes F-statistic (for ANOVA), Chi² (for non-parametric), p-values, and significance indicators.
 
-9. **"posthoc_AllComparisons"**: File name (including `.xlsx` extension) for the output Excel file containing results from Tukey’s post-hoc test (and non-parametric alternative). Includes p-values and significance indicators.
+10. **"posthoc_AllComparisons"**: File name (including `.xlsx` extension) for the output Excel file containing results from Tukey’s post-hoc test (and non-parametric alternative). Includes p-values and significance indicators.
 
-10. **"posthoc_vsControl1"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative). Includes p-values and significance indicators.
+11. **"posthoc_vsControl1"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup1"` (and its non-parametric alternative). Includes p-values and significance indicators.
 
-11. **"posthoc_vsControl2"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative). Includes p-values and significance indicators.
+12. **"posthoc_vsControl2"**: File name (including `.xlsx` extension) for the output Excel file containing results from the Dunnett post-hoc test against `"controlGroup2"` (and its non-parametric alternative). Includes p-values and significance indicators.
 
-12. **"graphBar"**: File name (with `.fig` extension) for the MATLAB figure output.  
+13. **"graphBar"**: File name (with `.fig` extension) for the MATLAB figure output.  
     - `"graphTitle"`: title of the graph.  
     - `"xAxisLabel"` and `"yAxisLabel"`: labels for the X and Y axes, respectively.
-    - `"showDead"´: LO HE CAMBIADO POR HIGHLIGHTVARIABLE para que no dependiense del nombre del excel. Pero claro ahora hay que terminar de actualizar el README. Tb me gustaría hacer opcional que aparezca el gráfico ¿if?
+    - `"showDead"`: LO HE CAMBIADO POR HIGHLIGHTVARIABLE para que no dependiense del nombre del excel. Pero claro ahora hay que terminar de actualizar el README. Tb me gustaría hacer opcional que aparezca el gráfico ¿if?
     ![image](https://github.com/user-attachments/assets/e419d805-6402-4252-b432-cf312358dcf2)
 
 Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
