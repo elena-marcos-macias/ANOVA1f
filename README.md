@@ -5,14 +5,15 @@ This code is designed to perform a one-way between-subjects ANOVA with up to fou
 ## Prerequisites
 
 - MATLAB must be installed (this code was developed using MATLAB R2024a).
-- The data to be analyzed must be contained in a single sheet of an Excel file (.xlsx). The file name must **not** contain spaces, punctuation marks, or special characters.  
+- The data to be analyzed must be contained in a single sheet of an Excel file (.xlsx). The file name must **not** contain spaces, punctuation marks, or special characters. The contents of the table **MUST** be in english.  
   - **NO cells should be empty** unless the whole row is to be discarded. This script completely deletes a row if any of its cells are empty.
   - The **first row** of the file must contain the variable names.  
   - Each **subsequent row** corresponds to one subject in the study.  
   - Each **column** represents a variable to be analyzed.  
   - One of the variables must be a **categorical grouping variable**, which is used to determine each subject’s group membership. *In this case, the variable “Genotipo” in column A serves as the categorical variable.*
-  - One of the variables can be another, **bimodal, categorical variable** which allow us to highlight certain subjects. *In column B, the variable "Muerte" indicates which animals died spontaneously during the experiment.*
-  <img width="1244" height="570" alt="image" src="https://github.com/user-attachments/assets/28aaa133-c468-42b9-9714-a51b6e549c81" />
+  - One of the variables can be another, **bimodal, categorical variable** which allow us to highlight certain subjects. *In column B, the variable "Muerte" indicates which animals died spontaneously during the experiment.* VOY A SACAR EL VALOR TRUE DE LA FUNCIÓN Y PONERLO EN EL JSON PARA QUE SEA MODIFICABLE.
+  <img width="1172" height="569" alt="image" src="https://github.com/user-attachments/assets/97c14b2b-31b2-40e8-8f6a-3f5f7235fd98" />
+
 
 
 ## Downloading the Repository
