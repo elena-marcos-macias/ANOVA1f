@@ -10,8 +10,8 @@ This code is designed to perform a one-way between-subjects ANOVA with up to fou
   - The **first row** of the file must contain the variable names.  
   - Each **subsequent row** corresponds to one subject in the study.  
   - Each **column** represents a variable to be analyzed.  
-  - One of the variables must be a **categorical grouping variable**, which is used to determine each subject’s group membership. *In this case, the variable “Genotipo” in column A serves as the categorical variable.*
-  - One of the variables can be another, **bimodal, categorical variable** which allow us to highlight certain subjects. *In column B, the variable "Muerte" indicates which animals died spontaneously during the experiment.*
+  - One of the variables must be a **categorical grouping variable**, which is used to determine each subject’s group membership. *In this case, the variable “Genotype” in column A serves as the categorical variable.*
+  - One of the variables can be another, **bimodal, categorical variable** which allow us to highlight certain subjects. *In column B, the variable "Deatg" indicates which animals died spontaneously during the experiment.*
   <img width="1172" height="569" alt="image" src="https://github.com/user-attachments/assets/97c14b2b-31b2-40e8-8f6a-3f5f7235fd98" />
 
 
@@ -64,7 +64,7 @@ Follow these steps to modify the JSON file appropriately:
           - **Numeric**: Specify the ranges of columns to be ignored using pairs of indices.  
           *Example: to ignore columns A–C and J–M, write `[1,3,10,13]`.*
   -  `"groupName"`: Name of the grouping variable. This must match the column header in the Excel file.  
-   *In the example data, this would be column A, labeled "Genotipo".*
+   *In the example data, this would be column A, labeled "Genotype".*
   -  `"groupOrder"`: List the categories of the grouping variable in the order you want them displayed in the graph (up to four categories). **All of the existing categories must be listed, regardless of you wanting them to appear in the graph or not.** ~LO QUIERO CAMBIAR PARA QUE PUEDAS SELECCIONAR CATEGORÍAS Y NO TENENGAS QUE USAR TODAS~
    *Example: `["WT", "Het", "Hom"]`.*
   -  `"groupControl"`: Specify the groups to be treated as control groups for the post-hoc Dunnett test (and its non-parametric equivalent).
