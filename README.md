@@ -99,7 +99,6 @@ Follow these steps to modify the JSON file appropriately:
 
 Once all necessary fields have been edited, save the `.json` file. It is not necessary to close the file before running the script, but it **must** be saved.
 
-~Tb me gustaría hacer opcional que aparezca el gráfico ¿if?~
 
 ## Running the Script
 
