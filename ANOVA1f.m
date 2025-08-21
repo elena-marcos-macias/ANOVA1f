@@ -68,7 +68,7 @@ group = reordercats(group, order); % Order in which groups should appear
 group_categories = categories(group); % After reordering, refresh the group variable
 
 % ------------ Check normality and homogeneity ---------------
-ANOVA_friendly = checkANOVA1f(data, group, group_categories);
+ANOVA_friendly = checkNormHom(data, group, group_categories);
 
 %------------- Analysis of variance (ANOVA or KRUSKAL-WALLIS)---------------
 [T_VarianceAnalysis, p_variance] = variance1f_analysis(data, group, ANOVA_friendly, regions_unique);
